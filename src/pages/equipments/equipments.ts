@@ -9,9 +9,9 @@ import { EquipmentDetailPage } from '../equipment-detail/equipment-detail';
   templateUrl: 'equipments.html',
 })
 export class EquipmentsPage {
-  equipmentItems: Observable<any>;
+  equipments: Observable<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient) {
-    this.equipmentItems = this.httpClient.get('http://localhost:3000/equipments/tractors');
+    this.equipments = this.httpClient.get('http://localhost:3000/equipments/tractors');
     //TODO: move the url to a file or something
     // this.equipments
     // .subscribe(data => {

@@ -7,12 +7,28 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>programs</ion-title>
+    <ion-title>Programs</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
-</ion-content>
+    <ion-list>
+      <button ion-item *ngFor="let program of (programs | async)" (click)="viewProgramDetail(program)">
+        <ion-card>
+          <ion-item>
+            <h2>{{ program.title }}</h2>
+            <p>{{ program.mainFeature }}</p>
+          </ion-item>
+          <img src="{{ program.imageUrl }}">
+  
+          <ion-card-content>
+            <p>{{ program.description }}</p>
+          </ion-card-content>
+  
+        </ion-card>
+      </button>
+  
+    </ion-list>
+  </ion-content>
