@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import Web3 from 'web3';
+import { DetailsPage }  from '../details/details';
 
 const OBSIDIAN_CONTRACT_ABI = [
 	{
@@ -205,8 +206,8 @@ export class HomePage {
 
   }
 
-  test(){
-    debugger;
+  viewDetails(){
+	this.navCtrl.push(DetailsPage);
     // let web3 = new Web3(web3.currentProvider || undefined);
     // let contractABI = web3.eth.contract(OBSIDIAN_CONTRACT_ABI);
     // let contractObj = contractABI.at(OBSIDIAN_CONTRACT_ADDRESS);      

@@ -2,6 +2,50 @@
     background-color: #4CAF50;
   }
 
-ion-app.md [padding] .scroll-content {
-    padding: 16px 0;
-}
+  .balance-dates {      
+    p:first-child{
+      margin-bottom: 0;
+    }
+    p:last-child {
+      margin-top: 0.5rem;
+    }
+  }
+
+  .buttons-area {
+    height: 50%;
+    ion-grid.grid {
+      height: 100%;
+      padding: 0;
+      ion-row.row{
+        height: 100%;
+        .button.disable-hover.button.button-ios.button-default.button-default-ios.button-full.button-full-ios{
+          padding: 1;
+        }
+        button {
+          height: 100%;
+          margin: 0;
+          text-transform: capitalize;
+          font-weight: 400;
+          background: white;
+          .button-inner{
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            align-items: center;                       
+          }
+        }
+        ion-col.col{
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .balance-details {
+    height: 50%;
+  }
+  .scroll-content{
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+  }

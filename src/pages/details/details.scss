@@ -1,0 +1,22 @@
+page-details {
+    .detail-items {
+        h6 {
+            font-weight: 100;
+        }
+
+        .item-md.item-block .item-inner {
+            padding-right: 2.5rem;
+            
+        }
+
+        .item-md {
+            padding-left: 2.5rem;
+        }
+        .included {
+            color: #4caf50;            
+        }
+        .not-included {
+            color: red;
+        }
+    }
+}
