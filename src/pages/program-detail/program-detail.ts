@@ -16,4 +16,8 @@ export class ProgramDetailPage {
     console.log('ionViewDidLoad ProgramDetailPage');
   }
 
+  applyToProgram(){
+    //debugger;
+    //TODO: still need to add logic and get the parameter of the program id
+  }
 }

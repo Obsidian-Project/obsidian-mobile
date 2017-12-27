@@ -25,7 +25,12 @@
           <ul>
             <li *ngFor="let detail of equipment.details">{{ detail }}</li>
           </ul>          
-          <p class="green center">$ 120 per month</p>               
-        </ion-card-content>      
+          <p class="green center">$ 120 per month</p>        
+          
+        <ion-footer no-shadow padding>
+            <button class="request-button" color="request" 
+            text-center ion-button block (click)="requestEquipment()">Request Equipment</button>
+          </ion-footer>              
+        </ion-card-content>     
       </ion-card>
 </ion-content>
