@@ -14,17 +14,21 @@
 
 
 <ion-content padding>
-    <ion-card>
-
+  <ion-list>
+    <button ion-item *ngFor="let equipment of (equipmentItems | async)" (click)="viewEquipmentDetail(equipment)">
+      <ion-card>
         <ion-item>
-          <h2>Tractor XP123</h2>
-          <p>Special for heavy front loader work.</p>
+          <h2>{{ equipment.title }}</h2>
+          <p>{{ equipment.mainFeature }}</p>
         </ion-item>
-        <img src="https://www.deere.com/assets/images/region-4/products/tractors/4-wheel-drive-tractors/9r-9rt-series/9370r/9370r_studio_r4e001857_small_986283a46b06b517765510bef0ff46774ad14c49.jpg">        
-        
+        <img src="{{ equipment.imageUrl }}">
+
         <ion-card-content>
-            <p>Increase performance and productivity. With cutting edge technology, the tractor is the best in its generation.</p>
-        </ion-card-content>             
-      
+          <p>{{ equipment.description }}</p>
+        </ion-card-content>
+
       </ion-card>
+    </button>
+
+  </ion-list>
 </ion-content>

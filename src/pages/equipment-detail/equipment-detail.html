@@ -7,12 +7,25 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>equipment-detail</ion-title>
+    <ion-title>{{ equipment.title }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding>    
+    <ion-card  style="height:100%">
+        <ion-item>          
+          <p>{{ equipment.mainFeature }}</p>
+        </ion-item>
+        <img src="{{ equipment.imageUrl }}">
+        
+        <ion-card-content> 
+          <p>The new 5E Series tractor applies John Deere’s engineering expertise to meet the basic needs of small-scale and part-time farmers, as well as specialty users and gardeners.</p>               
+          <ul>
+            <li *ngFor="let detail of equipment.details">{{ detail }}</li>
+          </ul>          
+          <p class="green center">$ 120 per month</p>               
+        </ion-card-content>      
+      </ion-card>
 </ion-content>

@@ -6,8 +6,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'equipment-detail.html',
 })
 export class EquipmentDetailPage {
-
+  equipment: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+      this.equipment = this.navParams.get('equipment');
   }
 
   ionViewDidLoad() {
