@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import Web3 from 'web3';
-import { DetailsPage }  from '../details/details';
+import { DetailsPage } from '../details/details';
+import { EquipmentsPage } from '../equipments/equipments';
+import { ActivityPage } from '../activity/activity';
+import { ProgramsPage } from '../programs/programs';
 
 const OBSIDIAN_CONTRACT_ABI = [
 	{
@@ -197,22 +200,34 @@ const OBSIDIAN_CONTRACT_ABI = [
 const OBSIDIAN_CONTRACT_ADDRESS = "0x19c216cb0e37b157e8531c2c4f402b2f4aa5de2b";
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+	selector: 'page-home',
+	templateUrl: 'home.html'
 })
 export class HomePage {
-  web3: any;
-  constructor(public navCtrl: NavController) {
+	web3: any;
+	constructor(public navCtrl: NavController) {
 
-  }
+	}
 
-  viewDetails(){
-	this.navCtrl.push(DetailsPage);
-    // let web3 = new Web3(web3.currentProvider || undefined);
-    // let contractABI = web3.eth.contract(OBSIDIAN_CONTRACT_ABI);
-    // let contractObj = contractABI.at(OBSIDIAN_CONTRACT_ADDRESS);      
-    // contractObj.members("0x1a711f850FD3757342B1790A9F4c530D3a2834BC", (error, result) => {
-    //   console.log(result);
-    // });
-  }
+	viewDetails() {
+		this.navCtrl.push(DetailsPage);
+		// let web3 = new Web3(web3.currentProvider || undefined);
+		// let contractABI = web3.eth.contract(OBSIDIAN_CONTRACT_ABI);
+		// let contractObj = contractABI.at(OBSIDIAN_CONTRACT_ADDRESS);      
+		// contractObj.members("0x1a711f850FD3757342B1790A9F4c530D3a2834BC", (error, result) => {
+		//   console.log(result);
+		// });
+	}
+
+	viewEquipments() {
+		this.navCtrl.push(EquipmentsPage);
+	}
+
+	viewActivity() {
+		this.navCtrl.push(ActivityPage);
+	}
+
+	viewPrograms(){
+		this.navCtrl.push(ProgramsPage);
+	}
 }
