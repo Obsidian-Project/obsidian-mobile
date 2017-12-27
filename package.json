@@ -1,5 +1,5 @@
 {
-  "name": "myApp",
+  "name": "obsidian",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -35,5 +35,5 @@
     "@ionic/app-scripts": "3.1.6",
     "typescript": "2.4.2"
   },
-  "description": "An Ionic project"
+  "description": "An inclusive asset sharing platform"
 }

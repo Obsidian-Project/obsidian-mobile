@@ -207,11 +207,11 @@ export class HomePage {
 
   test(){
     debugger;
-    this.web3 = new Web3(window.web3.currentProvider || undefined);
-    let contractABI = web3.eth.contract(OBSIDIAN_CONTRACT_ABI);
-    let contractObj = contractABI.at(OBSIDIAN_CONTRACT_ADDRESS);      
-    contractObj.members("0x1a711f850FD3757342B1790A9F4c530D3a2834BC", (error, result) => {
-      console.log(result);
-    });
+    // let web3 = new Web3(web3.currentProvider || undefined);
+    // let contractABI = web3.eth.contract(OBSIDIAN_CONTRACT_ABI);
+    // let contractObj = contractABI.at(OBSIDIAN_CONTRACT_ADDRESS);      
+    // contractObj.members("0x1a711f850FD3757342B1790A9F4c530D3a2834BC", (error, result) => {
+    //   console.log(result);
+    // });
   }
 }

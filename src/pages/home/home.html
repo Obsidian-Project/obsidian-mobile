@@ -1,16 +1,38 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Hello Pedro</ion-title>
+    <ion-buttons start left>
+      <button ion-button icon-only (click)="openModal()">
+        <ion-icon ios="ios-qr-scanner" md="md-qr-scanner"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title text-center>Obsidian</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModal()">
+        <ion-icon ios="ios-person" md="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="balance-details">
   <div text-center padding-vertical>
-
-  <h3>Balance</h3>
-  <h2>£ 1200</h2>
-
+    <h3>Edson Alcala</h3>
+    <h5>Balance</h5>
+    <h4>£ 1200</h4>
+    <span>Monthly fixed</span>
+    <ion-grid class="buttons-area">
+      <ion-row justify-content-between>
+        <ion-col col-4 text-center>
+          <p>Period</p>
+          <p>July</p>
+        </ion-col>
+        <ion-col col-4 text-center>
+          <p>Pay before</p>
+          <p>August 3</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <button ion-button (click)="test()" outline>View details</button>
   </div>
-  <button ion-button (click)="test()">Button</button>
-
 </ion-content>
