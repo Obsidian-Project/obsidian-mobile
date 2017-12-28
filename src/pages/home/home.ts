@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { DetailsPage } from '../details/details';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 //import { EquipmentsPage } from '../equipments/equipments';
 //import { ActivityPage } from '../activity/activity';
 //import { ProgramsPage } from '../programs/programs';
@@ -11,8 +13,14 @@ import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
 })
 export class HomePage {
 	web3: any;
-	constructor(public navCtrl: NavController, private web3Service: Web3ServiceProvider) {
-
+	constructor(public navCtrl: NavController, private web3Service: Web3ServiceProvider, private localNotifications: LocalNotifications) {
+		// Schedule a single notification
+		this.localNotifications.schedule({
+			title: "Obsidian",
+			text: 'A new subsidy has been published',
+			data: { secret: "data" },
+			at: null
+		});
 	}
 	viewDetails() {
 		this.navCtrl.push(DetailsPage);

@@ -2,6 +2,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Push } from '@ionic-native/push';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
@@ -58,6 +60,7 @@ import { Web3ServiceProvider } from '../providers/web3-service/web3-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ObsidianApiServiceProvider,
     Push,
+    LocalNotifications,
     Web3ServiceProvider
   ]
 })
