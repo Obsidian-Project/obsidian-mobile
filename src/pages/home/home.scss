@@ -43,6 +43,11 @@
 
   .balance-details {
     height: 100%;
+    .button-outline-md{
+      margin-top: 2rem;  
+      text-transform: none;
+      padding: 2rem 4rem;
+    }
   }
   .scroll-content{
     display: flex;
