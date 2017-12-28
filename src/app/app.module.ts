@@ -12,10 +12,12 @@ import { ProgramsPage } from '../pages/programs/programs';
 import { ProgramDetailPage } from '../pages/program-detail/program-detail';
 import { EquipmentDetailPage } from '../pages/equipment-detail/equipment-detail';
 
+import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     ActivityPage,
     ProgramsPage,
     ProgramDetailPage,
-    EquipmentDetailPage
+    EquipmentDetailPage,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     ActivityPage,
     ProgramsPage,
     ProgramDetailPage,
-    EquipmentDetailPage
+    EquipmentDetailPage,
+    TabsPage
   ],
   providers: [
     StatusBar,

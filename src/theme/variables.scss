@@ -54,7 +54,11 @@ $toolbar-ios-button-color: #FFF;
 $toolbar-ios-button-font-size: 1.2rem;
 $content-ios-outer-background: #000;
 $toolbar-ios-title-font-size:1.4rem;
-	
+  
+$tabs-ios-tab-text-color: #747474;
+$tabs-ios-tab-text-color-active: #ff5252;
+$tabs-ios-tab-icon-color: #000;
+$tabs-ios-tab-icon-color-active: #ff5252;
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
@@ -66,6 +70,12 @@ $toolbar-md-button-font-size: 1.2rem;
 $content-md-outer-background: #000;
 $toolbar-md-title-font-size:1.8rem;
 $toolbar-md-button-strong-font-weight: 100;
+
+$tabs-md-tab-text-color: #747474;
+$tabs-md-tab-text-color-active: #ff5252;
+$tabs-md-tab-icon-color: #000;
+$tabs-md-tab-icon-color-active: #ff5252;	
+
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here

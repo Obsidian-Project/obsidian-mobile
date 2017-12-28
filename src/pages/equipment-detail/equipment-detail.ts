@@ -15,4 +15,8 @@ export class EquipmentDetailPage {
     console.log('ionViewDidLoad EquipmentDetailPage');
   }
 
+  requestEquipment(){
+     //debugger;
+    //TODO: still need to add logic and get the parameter of the program id
+  }
 }
