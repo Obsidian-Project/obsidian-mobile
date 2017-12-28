@@ -24,7 +24,7 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let equipment of (equipments | async)" (click)="viewEquipmentDetail(equipment)">
+    <button detail-none ion-item *ngFor="let equipment of (equipments | async)" (click)="viewEquipmentDetail(equipment)">
       <ion-card>
         <ion-item>
           <h2>{{ equipment.title }}</h2>

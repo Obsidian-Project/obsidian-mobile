@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { DetailsPage } from '../details/details';
-import { EquipmentsPage } from '../equipments/equipments';
-import { ActivityPage } from '../activity/activity';
-import { ProgramsPage } from '../programs/programs';
+//import { EquipmentsPage } from '../equipments/equipments';
+//import { ActivityPage } from '../activity/activity';
+//import { ProgramsPage } from '../programs/programs';
 import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
 @Component({
 	selector: 'page-home',

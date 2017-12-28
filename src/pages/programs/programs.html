@@ -24,7 +24,7 @@
 
 <ion-content padding>
     <ion-list>
-      <button ion-item *ngFor="let program of (programs | async)" (click)="viewProgramDetail(program)">
+      <button detail-none ion-item *ngFor="let program of (programs | async)" (click)="viewProgramDetail(program)">
         <ion-card>
           <ion-item>
             <h2>{{ program.title }}</h2>

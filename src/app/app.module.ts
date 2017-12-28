@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { Push } from '@ionic-native/push';
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
@@ -19,6 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { ObsidianApiServiceProvider } from '../providers/obsidian-api-service/obsidian-api-service';
 import { Web3ServiceProvider } from '../providers/web3-service/web3-service';
+
 
 
 @NgModule({
@@ -55,6 +57,7 @@ import { Web3ServiceProvider } from '../providers/web3-service/web3-service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ObsidianApiServiceProvider,
+    Push,
     Web3ServiceProvider
   ]
 })
