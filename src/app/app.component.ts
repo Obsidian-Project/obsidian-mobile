@@ -12,7 +12,7 @@ import { ProgramDetailPage } from '../pages/program-detail/program-detail';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = TabsPage;
-
+  pushIntance: any;
   constructor(platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen, 
@@ -23,16 +23,18 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      console.log("initializando");
+      this.pushIntance = push;
       this.initPushNotification();
     });
   }
 
   initPushNotification() {
-    // if (!this.platform.is('cordova')) {
-    //   console.warn('Push notifications not initialized. Cordova is not available - Run in physical device');
-    //   return;
-    // }
+
     const options: PushOptions = {
+      android: {
+        senderID: 'YOUR_SENDER_ID'
+      },
       ios: {
         alert: 'true',
         badge: false,
@@ -40,7 +42,7 @@ export class MyApp {
       },
       windows: {}
     };
-    const pushObject: PushObject = this.push.init(options);
+    const pushObject: PushObject = this.pushIntance.init(options);
 
     pushObject.on('registration').subscribe((data: any) => {
       console.log('device token -> ' + data.registrationId);
@@ -48,33 +50,31 @@ export class MyApp {
     });
 
     pushObject.on('notification').subscribe((data: any) => {
-      console.log('message -> ' + data.message);
-      this.nav.push(ProgramDetailPage, { message: data.message });
-      console.log('Push notification clicked');
+      //console.log('message -> ' + data.message);
       //if user using app and push notification comes
-      // if (data.additionalData.foreground) {
-      //   // if application open, show popup
-      //   let confirmAlert = this.alertCtrl.create({
-      //     title: 'New Notification',
-      //     message: data.message,
-      //     buttons: [{
-      //       text: 'Ignore',
-      //       role: 'cancel'
-      //     }, {
-      //       text: 'View',
-      //       handler: () => {
-      //         //TODO: Your logic here
-      //         this.nav.push(ProgramDetailPage, { message: data.message });
-      //       }
-      //     }]
-      //   });
-      //   confirmAlert.present();
-      // } else {
-      //   //if user NOT using app and push notification comes
-      //   //TODO: Your logic on click of push notification directly
-      //   this.nav.push(ProgramDetailPage, { message: data.message });
-      //   console.log('Push notification clicked');
-      // }
+      if (data.additionalData.foreground) {
+        // if application open, show popup
+        let confirmAlert = this.alertCtrl.create({
+          title: 'New Notification',
+          message: data.message,
+          buttons: [{
+            text: 'Ignore',
+            role: 'cancel'
+          }, {
+            text: 'View',
+            handler: () => {
+              //TODO: Your logic here
+              this.nav.push(ProgramDetailPage, { message: data.message });
+            }
+          }]
+        });
+        confirmAlert.present();
+      } else {
+        //if user NOT using app and push notification comes
+        //TODO: Your logic on click of push notification directly
+        this.nav.push(ProgramDetailPage);
+        console.log('Push notification clicked');
+      }
     });
 
     pushObject.on('error').subscribe(error => console.error('Error with Push plugin' + error));
