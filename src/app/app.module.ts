@@ -20,6 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { ObsidianApiServiceProvider } from '../providers/obsidian-api-service/obsidian-api-service';
 import { Web3ServiceProvider } from '../providers/web3-service/web3-service';
+import { ToastServiceProvider } from '../providers/toast-service/toast-service';
 
 
 
@@ -58,7 +59,8 @@ import { Web3ServiceProvider } from '../providers/web3-service/web3-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ObsidianApiServiceProvider,
     Push,
-    Web3ServiceProvider
+    Web3ServiceProvider,
+    ToastServiceProvider
   ]
 })
 export class AppModule {}
