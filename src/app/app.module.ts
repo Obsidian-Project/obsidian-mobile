@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    MyApp,  
+    MyApp,
     HomePage,
     DetailsPage,
     EquipmentsPage,
@@ -38,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,   
+    MyApp,
     HomePage,
     DetailsPage,
     EquipmentsPage,

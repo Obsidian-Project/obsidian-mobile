@@ -2,7 +2,7 @@
     background-color: #4CAF50;
   }
 
-  .balance-dates {      
+  .balance-dates {
     p:first-child{
       margin-bottom: 0;
     }
@@ -31,7 +31,7 @@
             display: flex;
             flex-direction: column;
             align-content: center;
-            align-items: center;                       
+            align-items: center;
           }
         }
         ion-col.col{
@@ -44,7 +44,7 @@
   .balance-details {
     height: 100%;
     .button-outline-md{
-      margin-top: 2rem;  
+      margin-top: 2rem;
       text-transform: none;
       padding: 2rem 4rem;
     }
@@ -54,3 +54,17 @@
     flex-direction: column;
     align-content: stretch;
   }
+
+.profilePic{
+  height: 100px;
+  width: 100px;
+  background-color: grey;
+  border-radius: 50%;
+  margin: 1em auto;
+  overflow: hidden;
+   img{
+     object-fit: cover;
+     height: 100%;
+     width: 100%;
+   }
+}
