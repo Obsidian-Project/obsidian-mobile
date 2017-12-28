@@ -30,8 +30,8 @@ ion-app.md [padding] .scroll-content {
         font-family: 'Poppins', sans-serif;
     }
     h3, h4, h5, h6{
-        font-weight: 300;        
-    }   
+        font-weight: 300;
+    }
     h5 {
         font-size: 1.4rem;
     }
@@ -72,4 +72,19 @@ p.center {
 button.request-button {
     text-transform: capitalize;
     font-weight: 400;
+}
+
+ion-icon {
+    &[class*="appname-"] {
+        mask-size: contain;
+        mask-position: 50% 50%;
+        mask-repeat: no-repeat;
+        background: currentColor;
+        width: 1em;
+        height: 1em;
+    }
+    // custom icons
+    &[class*="appname-tractor"] {
+        mask-image: url(../assets/imgs/tractor.svg);
+    }
 }
