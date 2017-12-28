@@ -17,6 +17,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ObsidianApiServiceProvider } from '../providers/obsidian-api-service/obsidian-api-service';
+import { Web3ServiceProvider } from '../providers/web3-service/web3-service';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ObsidianApiServiceProvider,
+    Web3ServiceProvider
   ]
 })
 export class AppModule {}
