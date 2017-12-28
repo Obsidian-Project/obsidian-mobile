@@ -54,7 +54,7 @@ $toolbar-ios-button-color: #FFF;
 $toolbar-ios-button-font-size: 1.2rem;
 $content-ios-outer-background: #000;
 $toolbar-ios-title-font-size:1.4rem;
-  
+
 $tabs-ios-tab-text-color: #747474;
 $tabs-ios-tab-text-color-active: #ff5252;
 $tabs-ios-tab-icon-color: #000;
@@ -74,7 +74,7 @@ $toolbar-md-button-strong-font-weight: 100;
 $tabs-md-tab-text-color: #747474;
 $tabs-md-tab-text-color-active: #ff5252;
 $tabs-md-tab-icon-color: #000;
-$tabs-md-tab-icon-color-active: #ff5252;	
+$tabs-md-tab-icon-color-active: #ff5252;
 
 
 $img-placeholder-background: white;
@@ -108,3 +108,7 @@ $img-placeholder-background: white;
 
 @import "roboto";
 @import "noto-sans";
+
+
+$loading-ios-spinner-crescent-color: #808080;
+$loading-md-spinner-crescent-color: #808080;

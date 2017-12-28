@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController} from 'ionic-angular';
 import Web3 from 'web3';
 import { DetailsPage } from '../details/details';
 import { EquipmentsPage } from '../equipments/equipments';
@@ -225,17 +225,5 @@ export class HomePage {
 		// 		console.log(event);
 		// });
 
-	}
-
-	viewEquipments() {
-		this.navCtrl.push(EquipmentsPage);
-	}
-
-	viewActivity() {
-		this.navCtrl.push(ActivityPage);
-	}
-
-	viewPrograms() {
-		this.navCtrl.push(ProgramsPage);
 	}
 }
