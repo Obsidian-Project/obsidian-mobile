@@ -211,4 +211,14 @@ export class Web3ServiceProvider {
 		let contractObj = contractABI.at(OBSIDIAN_CONTRACT_ADDRESS);
 		return contractObj;
 	}
+
+	listenForNewPrograms(callback){
+		let events = this.getSmartContractObject().allEvents();
+		events.watch((error, event) => {
+			if(!error){
+				console.log(event)
+				callback("hi hi");
+			}
+		});
+	}
 }

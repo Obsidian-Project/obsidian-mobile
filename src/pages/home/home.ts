@@ -15,12 +15,16 @@ export class HomePage {
 	web3: any;
 	constructor(public navCtrl: NavController, private web3Service: Web3ServiceProvider, private localNotifications: LocalNotifications) {
 		// Schedule a single notification
-		this.localNotifications.schedule({
-			title: "Obsidian",
-			text: 'A new subsidy has been published',
-			data: { secret: "data" },
-			at: null
-		});
+		
+		//register listener for event changes in Ethereum
+		this.web3Service.listenForNewPrograms((ipfsProgramHash) => {
+			this.localNotifications.schedule({
+				title: "Obsidian",
+				text: 'A new subsidy has been published',
+				data: { secret: ipfsProgramHash },
+				at: null
+			});
+		})
 	}
 	viewDetails() {
 		this.navCtrl.push(DetailsPage);
