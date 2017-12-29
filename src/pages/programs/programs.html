@@ -27,11 +27,10 @@
       <button detail-none ion-item *ngFor="let program of (programs | async)" (click)="viewProgramDetail(program)">
         <ion-card>
           <ion-item>
-            <h2>{{ program.title }}</h2>
-            <p>{{ program.mainFeature }}</p>
+            <h2>{{ program.name }}</h2>
+            <p>Subsidy for £ {{ subsidyAmount }}</p>
           </ion-item>
-          <img src="{{ program.imageUrl }}">
-
+          <img src='{{ program.selectedEquipment ? program.selectedEquipment.images[2] : "https://www.deere.com/assets/images/region-4/products/tractors/4-wheel-drive-tractors/9r-9rt-series/9370r/9370r_studio_r4e001857_small_986283a46b06b517765510bef0ff46774ad14c49.jpg" }}'>
           <ion-card-content>
             <p>{{ program.description }}</p>
           </ion-card-content>
