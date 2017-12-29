@@ -25,7 +25,8 @@ export class HomePage {
 
 		web3Service.setupSmartContractInfo()
 			.then((info: any) => {
-				this.setupListeners();
+				//this.setupListeners();
+				web3Service.createProgramOnChain();//testing sending transaction
 			}).catch((error) => {
 				console.log(error);
 			});

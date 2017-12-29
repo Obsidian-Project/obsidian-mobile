@@ -80,4 +80,52 @@ export class Web3ServiceProvider {
 	addMember() {
 		// "0x1a711f850FD3757342B1790A9F4c530D3a2834BC", "89.123", "-96.1323", 12
 	}
+
+	createProgramOnChain = () => {
+		
+		return new Promise((resolve, reject) => {
+			debugger;			
+			let obsidianContract = this.getSmartContractObject();
+			obsidianContract.addProgram("123123123123123", {
+				gas: 2000000,
+				from: "0x101a4b7af0523bc8539d353eec163ac207ad680b"
+			}, (error, txHash) => {
+				if (error) { 
+					debugger;
+					throw error 
+				}
+				this.waitForMined(txHash, { blockNumber: null },
+					function pendingCB() {
+						// Signal to the user you're still waiting
+						// for a block confirmation
+						debugger;
+					},
+					function successCB(data) {
+						resolve();//don't need to pass nothing
+					}
+				)
+			})
+		})
+	}	
+	//make private methods
+	waitForMined = (txHash, response, pendingCB, successCB) => {
+		if (response.blockNumber) {
+			successCB();
+		} else {
+			pendingCB()
+			this.pollingLoop(txHash, response, pendingCB, successCB)
+		}
+	}
+	
+	pollingLoop = (txHash, response, pendingCB, successCB) => {
+		setTimeout(() => {
+			this.web3Instance.eth.getTransaction(txHash, (error, response) => {
+				if (error) { throw error }
+				if (response === null) {
+					response = { blockNumber: null }
+				}
+				this.waitForMined(txHash, response, pendingCB, successCB)
+			})
+		}, 1000);
+	}
 }
