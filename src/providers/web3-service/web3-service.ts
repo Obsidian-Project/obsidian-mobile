@@ -2,260 +2,81 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import Web3 from 'web3';
+//import { Storage } from '@ionic/storage';
+import { ObsidianApiServiceProvider } from '../obsidian-api-service/obsidian-api-service';
 
-const OBSIDIAN_CONTRACT_ABI = [
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "numberOfMembers",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "numberOfGroups",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "balances",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "membersInfo",
-		"outputs": [
-			{
-				"name": "latitude",
-				"type": "string"
-			},
-			{
-				"name": "longitude",
-				"type": "string"
-			},
-			{
-				"name": "sizeOfLand",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "members",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "element",
-				"type": "uint256"
-			}
-		],
-		"name": "getGroupInfo",
-		"outputs": [
-			{
-				"components": [
-					{
-						"name": "members",
-						"type": "address[]"
-					}
-				],
-				"name": "groupInformation",
-				"type": "tuple"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "newMember",
-				"type": "address"
-			},
-			{
-				"name": "latitude",
-				"type": "string"
-			},
-			{
-				"name": "longitude",
-				"type": "string"
-			},
-			{
-				"name": "sizeOfLand",
-				"type": "uint256"
-			}
-		],
-		"name": "addMember",
-		"outputs": [
-			{
-				"name": "result",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "newGroupMembers",
-				"type": "address[]"
-			}
-		],
-		"name": "registerGroup",
-		"outputs": [
-			{
-				"name": "result",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "memberAdress",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "isRegistered",
-				"type": "bool"
-			}
-		],
-		"name": "newMemberAdded",
-		"type": "event"
-	}
-];
+const ETHEREUM_PROVIDER = "http://52.178.92.72:8545";
 
-const OBSIDIAN_CONTRACT_ADDRESS = "0x041c46c4f1f17282a1e92391ad614e6de17118e9";
+interface SmartContractInfo {
+	abi: string;
+	address: string
+}
 
 @Injectable()
 export class Web3ServiceProvider {
 	web3Instance: any;
-	test: any;
-	constructor(public http: HttpClient) {
-		// if (typeof web3 !== 'undefined') {
-			//this.web3Instance = new Web3(web3.currentProvider);
-			this.web3Instance = new Web3(new Web3.providers.HttpProvider("http://52.178.92.72:8545"));
-			this.test = this.web3Instance;
-		//   } else {													  https://rinkeby.infura.io/IAaykcDCTiw5fKarKmNM 
-		// 	this.web3Instance = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/IAaykcDCTiw5fKarKmNM"));
-		//   }
-		//this.web3Instance = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/IAaykcDCTiw5fKarKmNM"));
+	smartContractAbi: any;
+	smartContractAddress: string;
+
+	constructor(public http: HttpClient,
+		//private storage: Storage,
+		private obsidianApiProvider: ObsidianApiServiceProvider,
+	) {
+		this.web3Instance = new Web3(new Web3.providers.HttpProvider(ETHEREUM_PROVIDER));
+		console.log("running service");
 	}
+
 	get() {
 		return this.web3Instance;
 	}
 
+	setupSmartContractInfo() {
+		return new Promise((resolve, reject) => {
+			//this.storage.clear().then(() => {
+			this.obsidianApiProvider.getSmartContractInfo()
+				.then((info: SmartContractInfo) => {
+					// this.storage.set('SMART_CONTRACT_ABI', info.abi);
+					// this.storage.set('SMART_CONTRACT_ADDRESS', info.address);	
+					this.smartContractAbi = info.abi;
+					this.smartContractAddress = info.address;
+					resolve(info);
+				})
+				.catch((error) => {
+					console.log(error);
+					reject(error);
+				})
+			//})
+		});
+
+	}
+
 	getSmartContractObject() {
-		let contractABI = this.web3Instance.eth.contract(OBSIDIAN_CONTRACT_ABI);
-		let contractObj = contractABI.at(OBSIDIAN_CONTRACT_ADDRESS);
+		let contractABI = this.web3Instance.eth.contract(this.smartContractAbi);
+		let contractObj = contractABI.at(this.smartContractAddress);
 		return contractObj;
 	}
 
-	listenForNewPrograms(callback){
-		console.log("Listening smart contract");
-		//debugger;
+	listenForNewMemberAdded(callback) {
 		let contract = this.getSmartContractObject();
-		// let events = contract.allEvents({});
-		// events.watch((error, event) => {
-		// 	console.log("something happened");
-		// 	if(!error){
-		// 		console.log(event)
-		// 		callback("hi hi");
-		// 	}
-		// });
+		var myEvent = contract.newMemberAdded({}, { fromBlock: 0, toBlock: 'latest' });
+		myEvent.watch(function (error, event) {
+			console.log("New member was added");
+			if (!error) {
+				console.log(event.args);
+				callback(event.args);
+			}
+		});
+	}
 
-		var myEvent = contract.newMemberAdded({}, {fromBlock: 0, toBlock: 'latest'});
-		myEvent.watch(function(error, event){		
-			console.log("something happened");
-			if(!error){
-				console.log(event)
-				callback("hi hi");
+	listenForNewPrograms(callback) {
+
+		let contract = this.getSmartContractObject();
+		var myEvent = contract.newProgrammAdded({}, { fromBlock: 0, toBlock: 'latest' });
+		myEvent.watch(function (error, event) {
+			console.log("New program was added");
+			if (!error) {
+				console.log(event.args);
+				callback(event.args);
 			}
 		});
 	}

@@ -15,7 +15,7 @@ export class ObsidianApiServiceProvider {
   }
 
   getSmartContractInfo(){
-    return this.http.get(SMART_CONTRACT_URL);
+    return this.http.get(SMART_CONTRACT_URL).toPromise();
   }
   
   getEquipments(){
