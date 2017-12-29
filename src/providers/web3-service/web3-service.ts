@@ -70,14 +70,14 @@ export class Web3ServiceProvider {
 
 	listenForNewPrograms(callback) {
 
-		let contract = this.getSmartContractObject();
-		var myEvent = contract.newProgrammAdded({}, { fromBlock: 0, toBlock: 'latest' });
-		myEvent.watch(function (error, event) {
-			console.log("New program was added");
-			if (!error) {
-				console.log(event.args);
-				callback(event.args);
-			}
-		});
+		// let contract = this.getSmartContractObject();
+		// var myEvent = contract.newProgrammAdded({}, { fromBlock: 0, toBlock: 'latest' });
+		// myEvent.watch(function (error, event) {
+		// 	console.log("New program was added");
+		// 	if (!error) {
+		// 		console.log(event.args);
+		// 		callback(event.args);
+		// 	}
+		// });
 	}
 }
