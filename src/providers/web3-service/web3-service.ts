@@ -32,11 +32,8 @@ export class Web3ServiceProvider {
 
 	setupSmartContractInfo() {
 		return new Promise((resolve, reject) => {
-			//this.storage.clear().then(() => {
 			this.obsidianApiProvider.getSmartContractInfo()
 				.then((info: SmartContractInfo) => {
-					// this.storage.set('SMART_CONTRACT_ABI', info.abi);
-					// this.storage.set('SMART_CONTRACT_ADDRESS', info.address);	
 					this.smartContractAbi = info.abi;
 					this.smartContractAddress = info.address;
 					resolve(info);
@@ -44,8 +41,7 @@ export class Web3ServiceProvider {
 				.catch((error) => {
 					console.log(error);
 					reject(error);
-				})
-			//})
+				});
 		});
 
 	}
@@ -70,14 +66,14 @@ export class Web3ServiceProvider {
 
 	listenForNewPrograms(callback) {
 
-		// let contract = this.getSmartContractObject();
-		// var myEvent = contract.newProgrammAdded({}, { fromBlock: 0, toBlock: 'latest' });
-		// myEvent.watch(function (error, event) {
-		// 	console.log("New program was added");
-		// 	if (!error) {
-		// 		console.log(event.args);
-		// 		callback(event.args);
-		// 	}
-		// });
+		let contract = this.getSmartContractObject();
+		var myEvent = contract.newProgramAdded({}, { fromBlock: 0, toBlock: 'latest' });
+		myEvent.watch(function (error, event) {
+			console.log("New program was added");
+			if (!error) {
+				console.log(event.args);
+				callback(event.args);
+			}
+		});
 	}
 }

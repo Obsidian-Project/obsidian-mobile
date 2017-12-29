@@ -19,7 +19,7 @@ export class HomePage {
 		// 	toastService.presentToast("A new program has been released", () =>{
 		// 		navCtrl.push(DetailsPage);
 		// 	});//puedo usar los toasters para los mensajes de exito					
-
+		
 		web3Service.setupSmartContractInfo()
 			.then((info: any) => {
 				this.setupListeners();
@@ -29,26 +29,25 @@ export class HomePage {
 
 	}
 	setupListeners() {
-		//this.listenForNewPrograms();
+		this.listenForNewPrograms();
 		this.listenForNewMemberAdded();
 	}
 
 	listenForNewPrograms() {
-		this.web3Service.listenForNewPrograms((ipfsProgramHash) => {
+		this.web3Service.listenForNewPrograms((programInfo) => {
 			this.localNotifications.schedule({
 				title: "Obsidian",
 				text: 'A new subsidy has been published',
-				data: { secret: ipfsProgramHash },
+				data: { secret: programInfo },
 				at: null
 			});
 		})
 	}
 	listenForNewMemberAdded() {
-		//no es el hash, es la member info
 		this.web3Service.listenForNewMemberAdded((memberInfo) => {			
 			this.localNotifications.schedule({
 				title: "Obsidian",
-				text: 'A new subsidy has been published',
+				text: 'A new member has been registered',
 				data: { secret: memberInfo },
 				at: null
 			});
