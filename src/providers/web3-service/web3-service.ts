@@ -76,4 +76,8 @@ export class Web3ServiceProvider {
 			}
 		});
 	}
+
+	addMember() {
+		// "0x1a711f850FD3757342B1790A9F4c530D3a2834BC", "89.123", "-96.1323", 12
+	}
 }
