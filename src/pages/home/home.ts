@@ -44,11 +44,12 @@ export class HomePage {
 		})
 	}
 	listenForNewMemberAdded() {
-		this.web3Service.listenForNewMemberAdded((ipfsProgramHash) => {
+		//no es el hash, es la member info
+		this.web3Service.listenForNewMemberAdded((memberInfo) => {			
 			this.localNotifications.schedule({
 				title: "Obsidian",
 				text: 'A new subsidy has been published',
-				data: { secret: ipfsProgramHash },
+				data: { secret: memberInfo },
 				at: null
 			});
 		})
