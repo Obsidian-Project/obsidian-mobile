@@ -2,19 +2,27 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
+const BASE_URL = "https://obsidian-api.azurewebsites.net";
+const TRACTOR_URL = `${BASE_URL}/equipments/tractors`;
+const PROGRAMS_URL = `${BASE_URL}/equipments/tractors`;
+const SMART_CONTRACT_URL = `${BASE_URL}/smartcontract`;
+
 @Injectable()
 export class ObsidianApiServiceProvider {
-  baseUrl: string = "https://obsidian-api.azurewebsites.net/equipments/tractors";
-
+  
   constructor(public http: HttpClient) {
     console.log('Hello ObsidianApiServiceProvider Provider');
   }
 
+  getSmartContractInfo(){
+    return this.http.get(SMART_CONTRACT_URL);
+  }
+  
   getEquipments(){
-    return this.http.get(this.baseUrl);
+    return this.http.get(TRACTOR_URL);
   }
 
   getPrograms(){
-      return this.http.get(this.baseUrl);
+      return this.http.get(PROGRAMS_URL);
   }
 }
