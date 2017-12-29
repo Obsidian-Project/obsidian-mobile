@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {  NavController, NavParams } from 'ionic-angular';
+import { ObsidianApiServiceProvider } from '../../providers/obsidian-api-service/obsidian-api-service';
 
 @Component({
   selector: 'page-program-detail',
@@ -7,9 +8,14 @@ import {  NavController, NavParams } from 'ionic-angular';
 })
 export class ProgramDetailPage {
   program: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  ipfsHash: string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public obsidianApi: ObsidianApiServiceProvider) {
     this.program = this.navParams.get('program');
-
+    debugger;
+    if(!this.program){
+        this.ipfsHash = this.navParams.get("ipfsHash");
+        this.program = obsidianApi.getProgram(this.ipfsHash);
+    }
   }
 
   ionViewDidLoad() {

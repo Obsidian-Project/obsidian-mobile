@@ -83,22 +83,19 @@ export class Web3ServiceProvider {
 
 	createProgramOnChain = () => {
 		
-		return new Promise((resolve, reject) => {
-			debugger;			
+		return new Promise((resolve, reject) => {				
 			let obsidianContract = this.getSmartContractObject();
 			obsidianContract.addProgram("123123123123123", {
 				gas: 2000000,
 				from: "0x101a4b7af0523bc8539d353eec163ac207ad680b"
 			}, (error, txHash) => {
-				if (error) { 
-					debugger;
+				if (error) { 					
 					throw error 
 				}
 				this.waitForMined(txHash, { blockNumber: null },
 					function pendingCB() {
 						// Signal to the user you're still waiting
-						// for a block confirmation
-						debugger;
+						// for a block confirmation						
 					},
 					function successCB(data) {
 						resolve();//don't need to pass nothing
