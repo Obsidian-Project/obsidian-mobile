@@ -7,20 +7,6 @@ const OBSIDIAN_CONTRACT_ABI = [
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
 		"name": "numberOfMembers",
 		"outputs": [
 			{
@@ -40,6 +26,39 @@ const OBSIDIAN_CONTRACT_ABI = [
 			{
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "balances",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
 			}
 		],
 		"payable": false,
@@ -118,23 +137,10 @@ const OBSIDIAN_CONTRACT_ABI = [
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "balances",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"inputs": [],
 		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
 		"constant": false,
@@ -187,14 +193,25 @@ const OBSIDIAN_CONTRACT_ABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "memberAdress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "isRegistered",
+				"type": "bool"
+			}
+		],
+		"name": "newMemberAdded",
+		"type": "event"
 	}
 ];
 
-const OBSIDIAN_CONTRACT_ADDRESS = "0x19c216cb0e37b157e8531c2c4f402b2f4aa5de2b";
+const OBSIDIAN_CONTRACT_ADDRESS = "0xc0c49839f26426ba9619683ed7a8869333a7358b";
 
 @Injectable()
 export class Web3ServiceProvider {
