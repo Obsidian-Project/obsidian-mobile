@@ -211,7 +211,7 @@ const OBSIDIAN_CONTRACT_ABI = [
 	}
 ];
 
-const OBSIDIAN_CONTRACT_ADDRESS = "0xc0c49839f26426ba9619683ed7a8869333a7358b";
+const OBSIDIAN_CONTRACT_ADDRESS = "0x041c46c4f1f17282a1e92391ad614e6de17118e9";
 
 @Injectable()
 export class Web3ServiceProvider {
