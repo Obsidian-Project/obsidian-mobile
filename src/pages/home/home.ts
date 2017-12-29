@@ -29,7 +29,7 @@ export class HomePage {
 
 	}
 	setupListeners() {
-		this.listenForNewPrograms();
+		//this.listenForNewPrograms();
 		this.listenForNewMemberAdded();
 	}
 
