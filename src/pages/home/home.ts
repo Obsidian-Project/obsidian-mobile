@@ -25,8 +25,8 @@ export class HomePage {
 
 		web3Service.setupSmartContractInfo()
 			.then((info: any) => {
-				//this.setupListeners();
-				web3Service.createProgramOnChain();//testing sending transaction
+				this.setupListeners();
+				//web3Service.createProgramOnChain();//testing sending transaction
 			}).catch((error) => {
 				console.log(error);
 			});
@@ -41,6 +41,7 @@ export class HomePage {
 		this.web3Service.listenForNewPrograms((programInfo) => {
 			this.localNotifications.schedule({
 				title: "Obsidian",
+				
 				text: 'A new subsidy has been published',
 				data: { programInfo: programInfo, type: "newProgram" },
 				at: null

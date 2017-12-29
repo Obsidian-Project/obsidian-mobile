@@ -28,6 +28,8 @@ export class ObsidianApiServiceProvider {
   }
 
   getProgram(ipfsHash){
-    return this.http.get(`${PROGRAM_URL}/${ipfsHash}`);
+    debugger;
+    let url = `${PROGRAM_URL}/${ipfsHash}`;
+    return this.http.get(url);
   }
 }

@@ -6,7 +6,7 @@ import Web3 from 'web3';
 import { ObsidianApiServiceProvider } from '../obsidian-api-service/obsidian-api-service';
 
 const ETHEREUM_PROVIDER = "http://52.178.92.72:8545";
-
+const DEMO_ADDRESS = "0x101a4b7af0523bc8539d353eec163ac207ad680b";
 interface SmartContractInfo {
 	abi: string;
 	address: string
@@ -81,13 +81,14 @@ export class Web3ServiceProvider {
 		// "0x1a711f850FD3757342B1790A9F4c530D3a2834BC", "89.123", "-96.1323", 12
 	}
 
-	createProgramOnChain = () => {
-		
+	applyForProgram = (programId) => {		
 		return new Promise((resolve, reject) => {				
+			let address = DEMO_ADDRESS;
+			let requester = address;
 			let obsidianContract = this.getSmartContractObject();
-			obsidianContract.addProgram("123123123123123", {
+			obsidianContract.requestEquipment(programId, requester, {
 				gas: 2000000,
-				from: "0x101a4b7af0523bc8539d353eec163ac207ad680b"
+				from: address
 			}, (error, txHash) => {
 				if (error) { 					
 					throw error 
@@ -104,7 +105,7 @@ export class Web3ServiceProvider {
 			})
 		})
 	}	
-	//make private methods
+
 	waitForMined = (txHash, response, pendingCB, successCB) => {
 		if (response.blockNumber) {
 			successCB();
