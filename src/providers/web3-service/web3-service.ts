@@ -200,7 +200,12 @@ const OBSIDIAN_CONTRACT_ADDRESS = "0x19c216cb0e37b157e8531c2c4f402b2f4aa5de2b";
 export class Web3ServiceProvider {
 	web3: any;
 	constructor(public http: HttpClient) {
-		this.web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/IAaykcDCTiw5fKarKmNM"));
+		if (typeof web3 !== 'undefined') {
+			this.web3 = new Web3(web3.currentProvider);
+		  } else {
+			this.web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/IAaykcDCTiw5fKarKmNM"));
+		  }
+		
 	}
 	get() {
 		return this.web3;
@@ -210,5 +215,18 @@ export class Web3ServiceProvider {
 		let contractABI = this.web3.eth.contract(OBSIDIAN_CONTRACT_ABI);
 		let contractObj = contractABI.at(OBSIDIAN_CONTRACT_ADDRESS);
 		return contractObj;
+	}
+
+	listenForNewPrograms(callback){
+		console.log("Listening smart contract");
+		debugger;
+		let events = this.getSmartContractObject().allEvents();
+		events.watch((error, event) => {
+			console.log("something happened");
+			if(!error){
+				console.log(event)
+				callback("hi hi");
+			}
+		});
 	}
 }
