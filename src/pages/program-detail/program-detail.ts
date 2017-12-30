@@ -12,16 +12,16 @@ import { HomePage } from '../home/home';
 export class ProgramDetailPage {
   program: any;
   ipfsHash: string;
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public obsidianApi: ObsidianApiServiceProvider,
     private web3Service: Web3ServiceProvider,
     public loadingCtrl: LoadingController,
-    private alertCtrl: AlertController) {      
+    private alertCtrl: AlertController) {
     this.program = this.navParams.get('program');
     this.ipfsHash = this.program.ipfsHash;
     this.program = obsidianApi.getProgram(this.ipfsHash);
-    
+
     // if(!this.program){
     //   this.ipfsHash = this.navParams.get("ipfsHash");
     //   this.program = obsidianApi.getProgram(this.ipfsHash);
@@ -33,18 +33,22 @@ export class ProgramDetailPage {
   }
 
   applyToProgram() {
+    debugger;
     let loader = this.getLoaderInstance();
+    console.log(this.program.programId);
     loader.present();
-    debugger; //TODO: still need to add logic and get the parameter of the program id
-    this.web3Service.applyForProgram(this.program.programId)
-      .then((result) => {
-          loader.dismiss();       
-      });
+    // this.web3Service.applyForProgram(this.program.programId)
+    //   .then((result) => {
+    //       loader.dismiss();       
+    //   });
+    setTimeout(() => {
+      loader.dismiss();
+    }, 3000);
   }
-
-  getLoaderInstance(){
+  
+  getLoaderInstance() {
     let loading = this.loadingCtrl.create({
-      spinner: 'iOS',
+      spinner: 'crescent',
       content: 'Requesting equipment',
       duration: 3000,
       showBackdrop: true,
@@ -53,20 +57,20 @@ export class ProgramDetailPage {
     loading.onDidDismiss(() => {
       console.log('Dismissed loading');
       this.presentAlert();
-    });      
+    });
     return loading;
   }
 
-  presentAlert() {
+  presentAlert() {//TODO: move to a service, duplication of code
     let alert = this.alertCtrl.create({
       subTitle: 'Your request has been sent',
-      enableBackdropDismiss: false,
+      enableBackdropDismiss: false,     
       buttons: [
         {
-          text: 'Ok',       
+          text: 'Ok',         
           handler: () => {
             let navTransition = alert.dismiss();
-            navTransition.then(() => {              
+            navTransition.then(() => {
               this.navCtrl.push(HomePage);
             });
             return false;

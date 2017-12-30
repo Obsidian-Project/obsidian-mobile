@@ -25,13 +25,13 @@ export class EquipmentDetailPage {
     this.loading();
   }
 
-  presentAlert() {
+  presentAlert() {//TODO: move to a service, duplication of code
     let alert = this.alertCtrl.create({
       subTitle: 'Your request has been sent',
-      enableBackdropDismiss: false,
+      enableBackdropDismiss: false,     
       buttons: [
         {
-          text: 'Ok',       
+          text: 'Ok',                
           handler: () => {
             let navTransition = alert.dismiss();
             navTransition.then(() => {              
@@ -48,7 +48,7 @@ export class EquipmentDetailPage {
 
   loading() {
     let loading = this.loadingCtrl.create({
-      spinner: 'iOS',
+      spinner: 'crescent',
       content: 'Requesting equipment',
       duration: 3000,
       showBackdrop: true,
