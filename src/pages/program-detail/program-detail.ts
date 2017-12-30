@@ -27,6 +27,7 @@ export class ProgramDetailPage {
       //TODO: need to move this to the API, so that the API has the responsibility
       this.program.programId = this.parameter.programId;
       this.program.ipfsHash = this.parameter.ipfsHash;
+      this.program.finalPrice = ((this.program.selectedEquipment.price - this.program.subsidyAmount) / 2).toFixed(2);
     })    
   }
 

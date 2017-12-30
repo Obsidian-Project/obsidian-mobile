@@ -13,6 +13,9 @@ export class EquipmentDetailPage {
     public loadingCtrl: LoadingController,   
     private alertCtrl: AlertController) {
     this.equipment = this.navParams.get('equipment');
+    // this.equipment.details = this.equipment.details.filter((item, index) => {
+    //     return index < 2;
+    // });
   }
 
   ionViewDidLoad() {

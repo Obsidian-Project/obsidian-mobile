@@ -17,7 +17,7 @@
     <ion-card  style="height:100%">
       <ion-item>
         <h2 text-wrap>{{ program?.description }}</h2>                     
-        <p class="subsidy" text-wrap>Subsidy for £ {{ program?.subsidyAmount }}</p>   
+        <p class="subsidy" text-wrap>Subsidy for $ {{ program?.subsidyAmount }}</p>   
       </ion-item>
 
       <img src="{{ program?.selectedEquipment.images[2] }}">
@@ -26,9 +26,9 @@
          
             <p text-wrap>{{ program?.selectedEquipment.description }}</p>
 
-            <p class="center normalAmount">$ 1000 per month</p>
+            <p class="center normalAmount">$ {{ program?.selectedEquipment.price }} per month</p>
 
-            <p class="green center">$ 400 per month</p>     
+            <p class="green center">$ {{ program?.finalPrice  }} per month</p>     
                    </ion-card-content>
         <ion-footer no-shadow padding>
             <button color="request" text-center ion-button block (click)="applyToProgram(program)" >Apply</button>

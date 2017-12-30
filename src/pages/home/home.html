@@ -22,58 +22,20 @@
     </div>
     <h3>Edson Alcala</h3>
     <span>Balance</span>
-    <h4>£ 1200</h4>
+    <h4>{{ balance ? "$" : "" }} {{ balance || "0"}}</h4>
     <span>Monthly fixed</span>
     <ion-grid>
       <ion-row justify-content-between>
         <ion-col col-4 text-center class="balance-dates">
           <p>Period</p>
-          <p>July</p>
+          <p>{{ balance ? "December" : "--"}}</p>
         </ion-col>
         <ion-col col-4 text-center class="balance-dates">
           <p>Pay before</p>
-          <p>August 3</p>
+          <p>{{ balance ? "January 3" : "--"}}</p>
         </ion-col>
       </ion-row>
     </ion-grid>
     <button ion-button (click)="viewDetails()" outline>View details</button>
-  </div>
-  <!-- <div class="buttons-area">
-      <ion-grid>
-          <ion-row>
-            <ion-col col-6 text-center>
-                <button ion-button full (click)="viewDetails()">
-                  <ion-img width="40" height="40" src="assets/imgs/tractor.png"></ion-img>
-                  <p>
-                      Request tractor
-                  </p>
-                </button>
-            </ion-col>
-            <ion-col col-6 text-center>
-                <button ion-button full (click)="viewPrograms()">
-                    <ion-img width="40" height="40" src="assets/imgs/contract.png"></ion-img>
-                  <p>
-                      Programs
-                  </p>
-                  </button>
-            </ion-col>
-            <ion-col col-6 text-center>
-                <button ion-button full (click)="viewActivity()">
-                    <ion-img width="40" height="40" src="assets/imgs/activity.png"></ion-img>
-                  <p>
-                      Activity
-                  </p>
-                  </button>
-            </ion-col>
-            <ion-col col-6 text-center>
-                <button ion-button full (click)="viewEquipments()">
-                    <ion-img width="40" height="40" src="assets/imgs/more-assets.png"></ion-img>
-                    <p>
-                        Equipments
-                    </p>
-                </button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-  </div> -->
+  </div>  
 </ion-content>

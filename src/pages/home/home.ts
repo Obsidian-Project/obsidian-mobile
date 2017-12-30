@@ -13,13 +13,16 @@ import { ProgramDetailPage } from '../program-detail/program-detail';
 })
 export class HomePage {
 	web3: any;
+	balance: any;
 	constructor(public navCtrl: NavController,
 		private web3Service: Web3ServiceProvider,
 		private localNotifications: LocalNotifications		
 		) {				
-
 		web3Service.setupSmartContractInfo()
 			.then((info: any) => {
+				this.web3Service.getMyBalance().then((result) =>{				
+					this.balance = result;
+				})
 				this.setupListeners();
 			}).catch((error) => {
 				console.log(error);

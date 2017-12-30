@@ -27,6 +27,16 @@ export class Web3ServiceProvider {
 		return this.web3Instance;
 	}
 
+	getMyBalance(){
+		return new Promise((resolve, reject) => {			
+			let contract = this.getSmartContractObject();
+			let address = DEMO_ADDRESS;
+			contract.balances(address, (error, result) => {
+				resolve(result.toNumber());
+			})
+		});
+
+	}
 	setupSmartContractInfo() {
 		return new Promise((resolve, reject) => {
 			this.obsidianApiProvider.getSmartContractInfo()
@@ -54,6 +64,19 @@ export class Web3ServiceProvider {
 		var myEvent = contract.newMemberAdded({}, { fromBlock: 0, toBlock: 'latest' });
 		myEvent.watch(function (error, event) {
 			console.log("New member was added");
+			if (!error) {
+				console.log(event.args);
+				callback(event.args);
+			}
+		});
+	}
+
+	listenForEquipmentTransferred(callback){
+		let contract = this.getSmartContractObject();
+		var myEvent = contract.
+		({}, { fromBlock: 0, toBlock: 'latest' });
+		myEvent.watch(function (error, event) {
+			console.log("New program was added");
 			if (!error) {
 				console.log(event.args);
 				callback(event.args);
