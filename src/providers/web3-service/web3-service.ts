@@ -59,38 +59,28 @@ export class Web3ServiceProvider {
 		return contractObj;
 	}
 
-	listenForNewMemberAdded(callback) {
-		let contract = this.getSmartContractObject();
-		var myEvent = contract.newMemberAdded({}, { fromBlock: 0, toBlock: 'latest' });
-		myEvent.watch(function (error, event) {
-			console.log("New member was added");
-			if (!error) {
-				console.log(event.args);
-				callback(event.args);
-			}
-		});
-	}
-
 	listenForEquipmentTransferred(callback){
 		let contract = this.getSmartContractObject();
-		var myEvent = contract.
-		({}, { fromBlock: 0, toBlock: 'latest' });
+		var myEvent = contract.newEquipmentTransferred({},'latest');
 		myEvent.watch(function (error, event) {
-			console.log("New program was added");
+			console.log("A equipment has been transferred");
 			if (!error) {
-				console.log(event.args);
-				callback(event.args);
+				let equipmentId = event.args.equipmentId.toNumber();
+				let recipient = event.args.recipient;
+				callback({
+					equipmentId, recipient
+				});
+				
 			}
 		});
 	}
 
 	listenForNewPrograms(callback) {
-
 		let contract = this.getSmartContractObject();
-		var myEvent = contract.newProgramAdded({}, { fromBlock: 0, toBlock: 'latest' });
+		var myEvent = contract.newProgramAdded({}, 'latest');
 		myEvent.watch(function (error, event) {
 			console.log("New program was added");
-			if (!error) {
+			if (!error) {			
 				console.log(event.args);
 				callback(event.args);
 			}

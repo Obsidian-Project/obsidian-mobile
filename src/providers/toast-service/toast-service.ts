@@ -20,7 +20,6 @@ export class ToastServiceProvider {
     
     toast.onDidDismiss((data, role) => {
       console.log('Dismissed toast');
-      debugger;
       if (role == "close") {
           callback();
       }

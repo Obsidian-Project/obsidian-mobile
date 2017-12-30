@@ -30,10 +30,24 @@ export class HomePage {
 	}
 	setupListeners() {
 		this.listenForNewPrograms();
-		this.listenForNewMemberAdded();
+		this.listenForEquipmentTransferred();
 		this.setupNotificationActions();
 	}
 
+	listenForEquipmentTransferred(){
+		this.web3Service.listenForEquipmentTransferred((transferInfo) => {		
+			this.localNotifications.schedule({
+				title: "Obsidian",				
+				text: 'You have received a new equipment',
+				data: { transferInfo: transferInfo, type: "newTransfer" },
+				at: null
+			});
+
+			this.web3Service.getMyBalance().then((result) =>{				
+				this.balance = result;
+			})
+		})
+	}
 	listenForNewPrograms() {
 		this.web3Service.listenForNewPrograms((programInfo) => {
 			this.localNotifications.schedule({
@@ -45,36 +59,22 @@ export class HomePage {
 		})
 	}
 
-	listenForNewMemberAdded() {
-		this.web3Service.listenForNewMemberAdded((memberInfo) => {
-			this.localNotifications.schedule({
-				title: "Obsidian",
-				text: 'A new member has been registered',
-				data: { memberInfo: memberInfo, type: "newMember" },
-				at: null
-			});
-		})
-	}
-
 	setupNotificationActions(): any {
 		this.localNotifications.on('click', (notification, state) => {
 			let json = JSON.parse(notification.data);
 			switch(json.type){
 				case "newProgram":
 					let { ipfsHash, programId } = json;
-					this.navCtrl.push(ProgramDetailPage, { program: { ipfsHash, programId } });
-				case "newMember":
-					this.navCtrl.push(DetailsPage);
+					this.navCtrl.push(ProgramDetailPage, { program: { ipfsHash, programId } });				
+				case "newTransfer":					
+					let { recipient, equipmentId } = json;
+					this.navCtrl.push(DetailsPage, { transferInfo: { recipient, equipmentId } });
 				default:
 					//nothing to do?
 			}
 		});
 	}
 	viewDetails() {
-		this.navCtrl.push(DetailsPage);
-		let smartContractInstance = this.web3Service.getSmartContractObject();
-		smartContractInstance.members("0x1a711f850FD3757342B1790A9F4c530D3a2834BC", (error, result) => {
-			console.log(result);
-		});
+		this.navCtrl.push(DetailsPage);		
 	}
 }

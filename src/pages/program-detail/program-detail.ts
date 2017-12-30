@@ -3,7 +3,6 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { ObsidianApiServiceProvider } from '../../providers/obsidian-api-service/obsidian-api-service';
 import { Observable } from 'rxjs/Observable';
 import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
-import { HomePage } from '../home/home';
 import 'rxjs/Rx';
 
 @Component({
@@ -73,7 +72,7 @@ export class ProgramDetailPage {
           handler: () => {
             let navTransition = alert.dismiss();
             navTransition.then(() => {
-              this.navCtrl.push(HomePage);
+              this.navCtrl.pop();
             });
             return false;
           }

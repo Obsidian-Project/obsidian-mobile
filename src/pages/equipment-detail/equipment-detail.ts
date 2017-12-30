@@ -34,11 +34,12 @@ export class EquipmentDetailPage {
       enableBackdropDismiss: false,     
       buttons: [
         {
-          text: 'Ok',                
+          text: 'Ok',      
+          cssClass: 'custom-color-alert',          
           handler: () => {
             let navTransition = alert.dismiss();
             navTransition.then(() => {              
-              this.navCtrl.push(HomePage);
+              this.navCtrl.setRoot(HomePage);
             });
             return false;
           }
