@@ -35,3 +35,11 @@
     @extend .fa-icons-general;
     content: "\f080";
 }
+
+
+.ion-ios-fa-archive::before,
+.ion-ios-fa-archive-outline::before,
+.ion-md-fa-archive::before {
+    @extend .fa-icons-general;
+    content: "\f187";
+}
