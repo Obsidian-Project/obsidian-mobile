@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {  NavController, NavParams } from 'ionic-angular';
+import { IventoryDetailPage } from '../iventory-detail/iventory-detail';
 
 @Component({
   selector: 'page-activity',
@@ -14,4 +15,8 @@ export class ActivityPage {
     console.log('ionViewDidLoad ActivityPage');
   }
 
+  viewIventoryDetail(){
+    this.navCtrl.push(IventoryDetailPage);
+    // console.log("hello");
+  }
 }

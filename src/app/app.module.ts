@@ -15,6 +15,7 @@ import { ActivityPage } from '../pages/activity/activity';
 import { ProgramsPage } from '../pages/programs/programs';
 import { ProgramDetailPage } from '../pages/program-detail/program-detail';
 import { EquipmentDetailPage } from '../pages/equipment-detail/equipment-detail';
+import { IventoryDetailPage } from '../pages/iventory-detail/iventory-detail';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -37,7 +38,8 @@ import { ToastServiceProvider } from '../providers/toast-service/toast-service';
     ProgramsPage,
     ProgramDetailPage,
     EquipmentDetailPage,
-    TabsPage
+    TabsPage,
+    IventoryDetailPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { ToastServiceProvider } from '../providers/toast-service/toast-service';
     ProgramsPage,
     ProgramDetailPage,
     EquipmentDetailPage,
-    TabsPage
+    TabsPage,
+    IventoryDetailPage
   ],
   providers: [
     StatusBar,
