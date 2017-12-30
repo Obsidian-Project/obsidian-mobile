@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import Web3 from 'web3';
-//import { Storage } from '@ionic/storage';
 import { ObsidianApiServiceProvider } from '../obsidian-api-service/obsidian-api-service';
 
 const ETHEREUM_PROVIDER = "http://52.178.92.72:8545";
 const DEMO_ADDRESS = "0x101a4b7af0523bc8539d353eec163ac207ad680b";
+
 interface SmartContractInfo {
 	abi: string;
 	address: string
@@ -18,12 +18,9 @@ export class Web3ServiceProvider {
 	smartContractAbi: any;
 	smartContractAddress: string;
 
-	constructor(public http: HttpClient,
-		//private storage: Storage,
-		private obsidianApiProvider: ObsidianApiServiceProvider,
-	) {
-		this.web3Instance = new Web3(new Web3.providers.HttpProvider(ETHEREUM_PROVIDER));
-		console.log("running service");
+	constructor(public http: HttpClient,	
+		private obsidianApiProvider: ObsidianApiServiceProvider) {
+		this.web3Instance = new Web3(new Web3.providers.HttpProvider(ETHEREUM_PROVIDER));	
 	}
 
 	get() {
@@ -75,10 +72,6 @@ export class Web3ServiceProvider {
 				callback(event.args);
 			}
 		});
-	}
-
-	addMember() {
-		// "0x1a711f850FD3757342B1790A9F4c530D3a2834BC", "89.123", "-96.1323", 12
 	}
 
 	applyForProgram = (programId) => {		
