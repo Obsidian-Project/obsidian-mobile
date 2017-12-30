@@ -68,9 +68,7 @@ export class HomePage {
 					this.navCtrl.push(ProgramDetailPage, { program: { ipfsHash, programId } });				
 				case "newTransfer":					
 					let { recipient, equipmentId } = json;
-					this.navCtrl.push(DetailsPage, { transferInfo: { recipient, equipmentId } });
-				default:
-					//nothing to do?
+					this.navCtrl.push(DetailsPage, { transferInfo: { recipient, equipmentId } });				
 			}
 		});
 	}
