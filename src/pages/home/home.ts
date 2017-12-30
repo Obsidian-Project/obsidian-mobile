@@ -59,7 +59,7 @@ export class HomePage {
 			switch(json.type){
 				case "newProgram":
 					let { ipfsHash, programId } = json;
-					this.navCtrl.push(ProgramDetailPage, { ipfsHash, programId });
+					this.navCtrl.push(ProgramDetailPage, { program: { ipfsHash, programId } });
 				case "newMember":
 					this.navCtrl.push(DetailsPage);
 				default:

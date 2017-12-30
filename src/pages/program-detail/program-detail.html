@@ -16,13 +16,13 @@
 <ion-content padding>
     <ion-card  style="height:100%">
       <ion-item>
-        <p>{{ (programTest | async)?.selectedEquipment.title}}</p>
+        <p>{{ (program | async)?.selectedEquipment.title}}</p>
       </ion-item>
 
         <img src="{{ (programTest | async)?.selectedEquipment.imageUrl }}">
 
         <ion-card-content>
-            <p>{{ (programTest | async)?.description }}</p>
+            <p>{{ (program | async)?.description }}</p>
 
             <p class="green center normalAmount">1000</p>
 

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ObsidianApiServiceProvider } from '../../providers/obsidian-api-service/obsidian-api-service';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-program-detail',
@@ -16,12 +17,15 @@ export class ProgramDetailPage {
     public obsidianApi: ObsidianApiServiceProvider,
     private web3Service: Web3ServiceProvider,
     public loadingCtrl: LoadingController,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController) {      
     this.program = this.navParams.get('program');
-    if(!this.program){
-      this.ipfsHash = this.navParams.get("ipfsHash");
-      this.program = obsidianApi.getProgram(this.ipfsHash);
-    }   
+    this.ipfsHash = this.program.ipfsHash;
+    this.program = obsidianApi.getProgram(this.ipfsHash);
+    
+    // if(!this.program){
+    //   this.ipfsHash = this.navParams.get("ipfsHash");
+    //   this.program = obsidianApi.getProgram(this.ipfsHash);
+    // }   
   }
 
   ionViewDidLoad() {
