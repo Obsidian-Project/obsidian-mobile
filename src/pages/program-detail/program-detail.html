@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-      <ion-title>{{ (program | async)?.name }}</ion-title>
+      <ion-title>{{ program?.name }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,24 +16,25 @@
 <ion-content padding>
     <ion-card  style="height:100%">
       <ion-item>
-        <h2 text-wrap>{{ (program | async)?.description }}</h2>                     
-        <p class="subsidy" text-wrap>Subsidy for £ {{ (program | async)?.subsidyAmount }}</p>   
+        <h2 text-wrap>{{ program?.description }}</h2>                     
+        <p class="subsidy" text-wrap>Subsidy for £ {{ program?.subsidyAmount }}</p>   
       </ion-item>
 
-      <img src="{{ (program | async)?.selectedEquipment.images[2] }}">
+      <img src="{{ program?.selectedEquipment.images[2] }}">
         <ion-card-content>   
-            <h3 text-wrap>{{ (program | async)?.selectedEquipment.title}}</h3>             
+            <h3 text-wrap>{{ program?.selectedEquipment.title}}</h3>             
          
-            <p text-wrap>{{ (program | async)?.selectedEquipment.description }}</p>
+            <p text-wrap>{{ program?.selectedEquipment.description }}</p>
 
             <p class="center normalAmount">$ 1000 per month</p>
 
             <p class="green center">$ 400 per month</p>     
-            <!-- <p class="red" text-center>limited to {{ (program | async)?.units }} units</p>  -->        
-        </ion-card-content>
+                   </ion-card-content>
         <ion-footer no-shadow padding>
-            <button color="request" text-center ion-button block (click)="applyToProgram()" >Apply</button>
+            <button color="request" text-center ion-button block (click)="applyToProgram(program)" >Apply</button>
             </ion-footer>
       </ion-card>
 </ion-content>
+
+ <!-- <p class="red" text-center>limited to {{ program?.units }} units</p>  -->        
 

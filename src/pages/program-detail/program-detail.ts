@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ObsidianApiServiceProvider } from '../../providers/obsidian-api-service/obsidian-api-service';
-// import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
 import { HomePage } from '../home/home';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'page-program-detail',
@@ -11,6 +12,7 @@ import { HomePage } from '../home/home';
 })
 export class ProgramDetailPage {
   program: any;
+  parameter: any;
   ipfsHash: string;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -18,32 +20,31 @@ export class ProgramDetailPage {
     private web3Service: Web3ServiceProvider,
     public loadingCtrl: LoadingController,
     private alertCtrl: AlertController) {
-    this.program = this.navParams.get('program');
-    this.ipfsHash = this.program.ipfsHash;
-    this.program = obsidianApi.getProgram(this.ipfsHash);
-
-    // if(!this.program){
-    //   this.ipfsHash = this.navParams.get("ipfsHash");
-    //   this.program = obsidianApi.getProgram(this.ipfsHash);
-    // }   
+    this.parameter = this.navParams.get('program');
+    this.ipfsHash = this.parameter.ipfsHash;   
+    obsidianApi.getProgram(this.ipfsHash).then((res) =>{
+      this.program = res;
+      //TODO: need to move this to the API, so that the API has the responsibility
+      this.program.programId = this.parameter.programId;
+      this.program.ipfsHash = this.parameter.ipfsHash;
+    })    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProgramDetailPage');
   }
 
-  applyToProgram() {
-    debugger;
+  applyToProgram(program) {
     let loader = this.getLoaderInstance();
     console.log(this.program.programId);
     loader.present();
-    // this.web3Service.applyForProgram(this.program.programId)
-    //   .then((result) => {
-    //       loader.dismiss();       
-    //   });
-    setTimeout(() => {
-      loader.dismiss();
-    }, 3000);
+    this.web3Service.applyForProgram(this.program.programId)
+      .then((result) => {
+          loader.dismiss();       
+      });
+    // setTimeout(() => {
+    //   loader.dismiss();
+    // }, 3000);
   }
   
   getLoaderInstance() {

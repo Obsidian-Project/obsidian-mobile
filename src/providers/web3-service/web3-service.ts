@@ -5,7 +5,7 @@ import Web3 from 'web3';
 import { ObsidianApiServiceProvider } from '../obsidian-api-service/obsidian-api-service';
 
 const ETHEREUM_PROVIDER = "http://52.178.92.72:8545";
-const DEMO_ADDRESS = "0x101a4b7af0523bc8539d353eec163ac207ad680b";
+const DEMO_ADDRESS = "0xf3ad20433639493ceab8a85fa838c73d65b84b6f";
 
 interface SmartContractInfo {
 	abi: string;

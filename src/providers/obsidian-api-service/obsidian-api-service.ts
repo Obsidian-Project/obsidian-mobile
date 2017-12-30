@@ -28,6 +28,6 @@ export class ObsidianApiServiceProvider {
 
   getProgram(ipfsHash){    
     let url = `${PROGRAMS_URL}/${ipfsHash}`;
-    return this.http.get(url);
+    return this.http.get(url).toPromise();
   }
 }
