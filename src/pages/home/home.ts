@@ -4,7 +4,6 @@ import { DetailsPage } from '../details/details';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
-//import { ToastServiceProvider } from '../../providers/toast-service/toast-service';
 import { ProgramDetailPage } from '../program-detail/program-detail';
 
 
@@ -16,13 +15,9 @@ export class HomePage {
 	web3: any;
 	constructor(public navCtrl: NavController,
 		private web3Service: Web3ServiceProvider,
-		private localNotifications: LocalNotifications
-		//private toastService: ToastServiceProvider
-		) {
-		// 	toastService.presentToast("A new program has been released", () =>{
-		// 		navCtrl.push(DetailsPage);
-		// 	});//puedo usar los toasters para los mensajes de exito					
-
+		private localNotifications: LocalNotifications		
+		) {				
+			
 		web3Service.setupSmartContractInfo()
 			.then((info: any) => {
 				this.setupListeners();
