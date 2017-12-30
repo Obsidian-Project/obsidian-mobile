@@ -17,7 +17,7 @@ export class HomePage {
 		private web3Service: Web3ServiceProvider,
 		private localNotifications: LocalNotifications		
 		) {				
-			
+
 		web3Service.setupSmartContractInfo()
 			.then((info: any) => {
 				this.setupListeners();
@@ -34,8 +34,7 @@ export class HomePage {
 	listenForNewPrograms() {
 		this.web3Service.listenForNewPrograms((programInfo) => {
 			this.localNotifications.schedule({
-				title: "Obsidian",
-				
+				title: "Obsidian",				
 				text: 'A new subsidy has been published',
 				data: { programInfo: programInfo, type: "newProgram" },
 				at: null
