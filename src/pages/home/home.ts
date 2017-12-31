@@ -50,6 +50,7 @@ export class HomePage {
 	}
 	listenForNewPrograms() {
 		this.web3Service.listenForNewPrograms((programInfo) => {
+			debugger;
 			this.localNotifications.schedule({
 				title: "Obsidian",				
 				text: 'A new subsidy has been published',
@@ -63,11 +64,10 @@ export class HomePage {
 		this.localNotifications.on('click', (notification, state) => {
 			let json = JSON.parse(notification.data);
 			switch(json.type){
-				case "newProgram":
-					let { ipfsHash, programId } = json;
-					this.navCtrl.push(ProgramDetailPage, { program: { ipfsHash, programId } });				
+				case "newProgram":					
+					this.navCtrl.push(ProgramDetailPage, { program: { ipfsHash: json.programInfo.ipfsHash, programId: json.programInfo.programId } });				
 				case "newTransfer":					
-					let { recipient, equipmentId } = json;
+					let { recipient, equipmentId } = json.transferInfo;
 					this.navCtrl.push(DetailsPage, { transferInfo: { recipient, equipmentId } });				
 			}
 		});
