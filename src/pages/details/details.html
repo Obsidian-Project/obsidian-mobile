@@ -23,57 +23,32 @@
       <ion-row justify-content-between>
         <ion-col col-4 text-center>
           <p>Balance</p>
-          <p>$ 1500</p>
+          <p>{{ balance ? "$" : "" }} {{ balance || "0"}}</p>
         </ion-col>
         <ion-col col-4 text-center>
           <p>Monthly fixed</p>
-          <p>$ 1400</p>
+          <p>{{ balance ? "$" : "" }} {{ balance || "0"}}</p>
         </ion-col>
       </ion-row>
       <ion-row justify-content-between class="line-on-bottom">
         <ion-col col-4 text-center>
           <p>Period</p>
-          <p>July</p>
+          <p>{{ balance ? "December" : "--"}}</p>
         </ion-col>
         <ion-col col-4 text-center>
           <p>Pay before</p>
-          <p>August 3</p>
+          <p>{{ balance ? "January 3" : "--"}}</p>
         </ion-col>
       </ion-row>   
     </ion-grid>
   </div>
   <div class="detail-items">
       <ion-list>
-          <ion-item>
-            <h6>Tractor 6M Series</h6>
-            <p>July 29</p>           
-            <p item-end class="not-included">$ 129</p>
-          </ion-item>
-          <ion-item>
-              <h6>Tractor 6M Series</h6>
-              <p>July 29</p>              
-              <p item-end class="not-included">$ 129</p>
-            </ion-item>
-            <ion-item>
-                <h6>Tractor 6M Series</h6>
-                <p>July 29</p>
-                <p item-end class="not-included">$ 129</p>
-              </ion-item>
-              <ion-item>
-                  <h6>Tractor 6M Series</h6>
-                  <p>July 29</p>
-                  <p item-end class="included">Included in Plan</p>
-                </ion-item>
-                <ion-item>
-                    <h6>Tractor 6M Series</h6>
-                    <p>July 29</p>
-                    <p item-end class="included">Included in Plan</p>
-                  </ion-item>
-                  <ion-item>
-                      <h6>Tractor 6M Series</h6>
-                      <p>July 29</p>
-                      <p item-end class="included">Included in Plan</p>
-                    </ion-item>
+          <ion-item *ngFor="let equipment of (equipments | async)">
+            <h6>{{ equipment.title }}</h6>
+            <p>December 30</p>           
+            <p item-end class="included">$ 300</p>
+          </ion-item>           
         </ion-list>
   </div>
 </ion-content>
