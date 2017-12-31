@@ -21,21 +21,24 @@
     </ion-navbar>
   </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    <button detail-none ion-item (click)="viewIventoryDetail()">
-      <ion-card>
-        <ion-item>
-          <h2 text-wrap>123</h2>
-          <p text-wrap>123</p>
-        </ion-item>
-        <img src>
 
-        <ion-card-content>
-          <p text-wrap>123</p>
-        </ion-card-content>
-
-      </ion-card>
-    </button>
-  </ion-list>
-</ion-content>
+  <ion-content padding>
+      <ion-list>
+        <button detail-none ion-item *ngFor="let equipment of (equipments | async)">
+          <ion-card>
+            <ion-item>
+              <h2 text-wrap>{{ equipment.title }}</h2>
+              <p text-wrap>{{ equipment.mainFeature }}</p>
+            </ion-item>
+            <img src="{{ equipment.imageUrl }}">
+    
+            <ion-card-content>
+              <p text-wrap>{{ equipment.description }}</p>
+            </ion-card-content>
+    
+          </ion-card>
+        </button>
+    
+      </ion-list>
+    </ion-content>
+    

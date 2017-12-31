@@ -6,6 +6,7 @@ const BASE_URL = "https://obsidian-api.azurewebsites.net";
 const TRACTOR_URL = `${BASE_URL}/equipments/tractors`;
 const PROGRAMS_URL = `${BASE_URL}/programs`;
 const SMART_CONTRACT_URL = `${BASE_URL}/smartcontract`;
+const MY_EQUIPMENTS_URL =  `${BASE_URL}/myequipments`;
 
 @Injectable()
 export class ObsidianApiServiceProvider {
@@ -25,7 +26,10 @@ export class ObsidianApiServiceProvider {
   getPrograms(){
       return this.http.get(PROGRAMS_URL);
   }
-
+  getMyEquipments(){
+    return this.http.get(MY_EQUIPMENTS_URL);    
+  }
+  
   getProgram(ipfsHash){    
     let url = `${PROGRAMS_URL}/${ipfsHash}`;
     return this.http.get(url).toPromise();
