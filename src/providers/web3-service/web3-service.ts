@@ -65,16 +65,16 @@ export class Web3ServiceProvider {
 		myEvent.watch((error, event) => {
 			console.log("A equipment has been transferred");
 			if (!error) {
-				this.storage.get('newEquipmentTransferred').then((val) => {
-					if (val) {
-						let equipmentId = event.args.equipmentId.toNumber();
-						let recipient = event.args.recipient;
-						callback({
-							equipmentId, recipient
-						});
-					}
-					this.storage.set('newEquipmentTransferred', 'on');
+				//this.storage.get('newEquipmentTransferred').then((val) => {
+				//	if (val) {
+				let equipmentId = event.args.equipmentId.toNumber();
+				let recipient = event.args.recipient;
+				callback({
+					equipmentId, recipient
 				});
+				//	}
+					//this.storage.set('newEquipmentTransferred', 'on');
+				//});
 			}
 		});
 	}
@@ -85,13 +85,13 @@ export class Web3ServiceProvider {
 		myEvent.watch((error, event) => {
 			console.log("New program was added");
 			if (!error) {
-				this.storage.get('newProgramAdded').then((val) => {
-					if (val) {
-						console.log(event.args);
-						callback(event.args);
-					}
-					this.storage.set('newProgramAdded', 'on');
-				});
+				//this.storage.get('newProgramAdded').then((val) => {
+				//	if (val) {
+				//		console.log(event.args);
+				callback(event.args);
+				//	}
+				//	this.storage.set('newProgramAdded', 'on');
+				//});
 			}
 		});
 	}

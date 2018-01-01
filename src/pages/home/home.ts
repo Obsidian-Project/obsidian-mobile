@@ -18,6 +18,7 @@ export class HomePage {
 	balance: any;
 	imageUrl: string;
 	name: string;
+	address: string;
 	constructor(public navCtrl: NavController,
 		private localNotifications: LocalNotifications,
 		public events: Events,
@@ -27,11 +28,11 @@ export class HomePage {
 	) {
 		obsidianApiProvider.getAccountInfo().then((accountInfo: any) => {
 			this.storage.clear().then(() => {			
-				debugger;
 				this.storage.set('address', accountInfo.account);
 				this.storage.set('profileImageUrl', accountInfo.profileImageUrl);
 				this.storage.set('name', accountInfo.name);
 				this.name = accountInfo.name;
+				this.address = accountInfo.address;
 				this.imageUrl = accountInfo.profileImageUrl;
 				web3Service.setupSmartContractInfo(accountInfo.account)
 					.then((info: any) => {						
@@ -49,11 +50,27 @@ export class HomePage {
 	setupListeners() {
 		this.listenForNewPrograms();
 		this.listenForEquipmentTransferred();
+		this.listenForPeerRequests();
 		this.setupNotificationActions();
 	}
 	ionViewDidLoad() {
 		console.log('HomePage');
 	}
+
+	listenForPeerRequests() {
+		this.web3Service.listenForPeerRequests((peerRequestInfo) => {
+			debugger;
+			if(peerRequestInfo.account !== this.address){
+				this.localNotifications.schedule({
+					title: "Obsidian",
+					text: 'A member of your group has requested a new equipment',
+					data: { transferInfo: peerRequestInfo, type: "newPeerRequest" },
+					at: null
+				});
+			}
+		})
+	}
+
 	listenForEquipmentTransferred() {
 		this.web3Service.listenForEquipmentTransferred((transferInfo) => {
 			this.events.publish('equipmentTransferred');
