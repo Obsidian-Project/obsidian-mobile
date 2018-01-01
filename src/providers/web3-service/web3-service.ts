@@ -78,7 +78,22 @@ export class Web3ServiceProvider {
 			}
 		});
 	}
-
+	listenForPeerRequests(callback) {
+		let contract = this.getSmartContractObject();
+		var myEvent = contract.newPeerRequestAdded({}, 'latest');
+		myEvent.watch((error, event) => {
+			console.log("New peer request was added");
+			if (!error) {
+				//this.storage.get('newProgramAdded').then((val) => {
+				//	if (val) {
+				//		console.log(event.args);
+				callback(event.args);
+				//	}
+				//	this.storage.set('newProgramAdded', 'on');
+				//});
+			}
+		});
+	}
 	listenForNewPrograms(callback) {
 		let contract = this.getSmartContractObject();
 		var myEvent = contract.newProgramAdded({}, 'latest');
