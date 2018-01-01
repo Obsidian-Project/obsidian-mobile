@@ -5,6 +5,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ProgramDetailPage } from '../pages/program-detail/program-detail';
+// import { Storage } from '@ionic/storage';
+// import { ObsidianApiServiceProvider } from '../providers/obsidian-api-service/obsidian-api-service';
+// import { Web3ServiceProvider } from '../providers/web3-service/web3-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,8 +15,8 @@ import { ProgramDetailPage } from '../pages/program-detail/program-detail';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = TabsPage;
-  pushIntance: any;
-  constructor(platform: Platform, 
+  pushInstance: any;
+  constructor(platform: Platform,
     statusBar: StatusBar, 
     splashScreen: SplashScreen, 
     public push: Push,
@@ -24,8 +27,9 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       console.log("initializando");
-      this.pushIntance = push;
+      this.pushInstance = push;
       this.initPushNotification();
+     
     });
   }
 
@@ -42,7 +46,7 @@ export class MyApp {
       },
       windows: {}
     };
-    const pushObject: PushObject = this.pushIntance.init(options);
+    const pushObject: PushObject = this.pushInstance.init(options);
 
     pushObject.on('registration').subscribe((data: any) => {
       console.log('device token -> ' + data.registrationId);

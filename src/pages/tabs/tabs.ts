@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { EquipmentsPage } from '../equipments/equipments';
@@ -16,7 +16,9 @@ export class TabsPage {
   equipmentsTab = EquipmentsPage;
   myEquipmentsTab = MyEquipmentsPage;
   programsTab = ProgramsPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams
+  ) {
+
   }
 
   ionViewDidLoad() {

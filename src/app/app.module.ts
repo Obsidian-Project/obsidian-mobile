@@ -4,7 +4,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Push } from '@ionic-native/push';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { IonicStorageModule } from '@ionic/storage';
-
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
@@ -25,7 +24,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ObsidianApiServiceProvider } from '../providers/obsidian-api-service/obsidian-api-service';
 import { Web3ServiceProvider } from '../providers/web3-service/web3-service';
 import { ToastServiceProvider } from '../providers/toast-service/toast-service';
-
 
 
 @NgModule({

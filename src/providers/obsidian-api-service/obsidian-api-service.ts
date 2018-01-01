@@ -7,6 +7,7 @@ const TRACTOR_URL = `${BASE_URL}/equipments/tractors`;
 const PROGRAMS_URL = `${BASE_URL}/programs`;
 const SMART_CONTRACT_URL = `${BASE_URL}/smartcontract`;
 const MY_EQUIPMENTS_URL =  `${BASE_URL}/myequipments`;
+const ACCOUNT_INFO = `${BASE_URL}/accountInfo`;
 
 @Injectable()
 export class ObsidianApiServiceProvider {
@@ -19,6 +20,9 @@ export class ObsidianApiServiceProvider {
     return this.http.get(SMART_CONTRACT_URL).toPromise();
   }
   
+  getAccountInfo(){
+    return this.http.get(ACCOUNT_INFO).toPromise();
+  }
   getEquipments(){
     return this.http.get(TRACTOR_URL);
   }
