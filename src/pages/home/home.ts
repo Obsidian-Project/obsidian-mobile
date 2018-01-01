@@ -5,6 +5,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
 import { ProgramDetailPage } from '../program-detail/program-detail';
+import { Events } from 'ionic-angular';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class HomePage {
 	balance: any;
 	constructor(public navCtrl: NavController,
 		private web3Service: Web3ServiceProvider,
-		private localNotifications: LocalNotifications		
+		private localNotifications: LocalNotifications,
+		public events: Events		
 		) {				
 		web3Service.setupSmartContractInfo()
 			.then((info: any) => {
@@ -35,7 +37,8 @@ export class HomePage {
 	}
 
 	listenForEquipmentTransferred(){
-		this.web3Service.listenForEquipmentTransferred((transferInfo) => {		
+		this.web3Service.listenForEquipmentTransferred((transferInfo) => {	
+			this.events.publish('equipmentTransferred');	
 			this.localNotifications.schedule({
 				title: "Obsidian",				
 				text: 'You have received a new equipment',
@@ -51,6 +54,8 @@ export class HomePage {
 	listenForNewPrograms() {
 		this.web3Service.listenForNewPrograms((programInfo) => {
 			debugger;
+			this.events.publish('programCreated');
+			this.navCtrl.push(ProgramDetailPage, { program: { ipfsHash: programInfo.ipfsHash, programId: programInfo.programId } });							
 			this.localNotifications.schedule({
 				title: "Obsidian",				
 				text: 'A new subsidy has been published',

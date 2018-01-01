@@ -11,7 +11,7 @@ import { HomePage } from '../pages/home/home';
 
 import { DetailsPage } from '../pages/details/details';
 import { EquipmentsPage } from '../pages/equipments/equipments';
-import { ActivityPage } from '../pages/activity/activity';
+import { MyEquipmentsPage } from '../pages/myequipments/myequipments';
 import { ProgramsPage } from '../pages/programs/programs';
 import { ProgramDetailPage } from '../pages/program-detail/program-detail';
 import { EquipmentDetailPage } from '../pages/equipment-detail/equipment-detail';
@@ -34,7 +34,7 @@ import { ToastServiceProvider } from '../providers/toast-service/toast-service';
     HomePage,
     DetailsPage,
     EquipmentsPage,
-    ActivityPage,
+    MyEquipmentsPage,
     ProgramsPage,
     ProgramDetailPage,
     EquipmentDetailPage,
@@ -53,7 +53,7 @@ import { ToastServiceProvider } from '../providers/toast-service/toast-service';
     HomePage,
     DetailsPage,
     EquipmentsPage,
-    ActivityPage,
+    MyEquipmentsPage,
     ProgramsPage,
     ProgramDetailPage,
     EquipmentDetailPage,
