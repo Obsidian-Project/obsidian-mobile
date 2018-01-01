@@ -15,7 +15,7 @@ import { ProgramsPage } from '../pages/programs/programs';
 import { ProgramDetailPage } from '../pages/program-detail/program-detail';
 import { EquipmentDetailPage } from '../pages/equipment-detail/equipment-detail';
 import { IventoryDetailPage } from '../pages/iventory-detail/iventory-detail';
-
+import { EquipmentRequestPage } from '../pages/equipment-request/equipment-request';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -37,7 +37,8 @@ import { ToastServiceProvider } from '../providers/toast-service/toast-service';
     ProgramDetailPage,
     EquipmentDetailPage,
     TabsPage,
-    IventoryDetailPage
+    IventoryDetailPage,
+    EquipmentRequestPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,8 @@ import { ToastServiceProvider } from '../providers/toast-service/toast-service';
     ProgramDetailPage,
     EquipmentDetailPage,
     TabsPage,
-    IventoryDetailPage
+    IventoryDetailPage,
+    EquipmentRequestPage
   ],
   providers: [
     StatusBar,

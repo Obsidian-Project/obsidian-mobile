@@ -37,6 +37,16 @@ export class Web3ServiceProvider {
 		});
 
 	}
+
+	requestOfEquipment(equipmentId){
+		return new Promise((resolve, reject) => {
+			let contract = this.getSmartContractObject();			
+			contract.requestEquipment(equipmentId, (error, result) => {
+				resolve(result.toNumber());
+			})
+		});
+	}
+
 	setupSmartContractInfo(address) {	
 		return new Promise((resolve, reject) => {
 			this.address = address;
@@ -80,7 +90,7 @@ export class Web3ServiceProvider {
 	}
 	listenForPeerRequests(callback) {
 		let contract = this.getSmartContractObject();
-		var myEvent = contract.newPeerRequestAdded({}, 'latest');
+		var myEvent = contract.newEquipmentRequested({}, 'latest');
 		myEvent.watch((error, event) => {
 			console.log("New peer request was added");
 			if (!error) {

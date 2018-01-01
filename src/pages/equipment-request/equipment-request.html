@@ -1,0 +1,38 @@
+<!--
+  Generated template for the EquipmentRequestPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ (equipment | async)?.title }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card style="height:100%">
+      <ion-item>
+        <p>{{ (equipment | async)?.mainFeature }}</p>
+      </ion-item>
+      <img src="{{ (equipment | async)?.imageUrl }}">
+
+      <ion-card-content>
+        <ul>
+          <li *ngFor="let detail of (equipment | async)?.details">
+              {{ detail }}
+            </li>
+        </ul>
+        <p class="green center">$ {{ (equipment | async)?.price / 2 }} per month</p>     
+                
+      </ion-card-content>      
+      <ion-footer no-shadow padding>
+          <button class="request-button" color="request"
+          text-center ion-button block (click)="approveRequestOfEquipment()">Approve Request</button> 
+          </ion-footer>             
+    </ion-card>      
+</ion-content>

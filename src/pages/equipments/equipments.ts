@@ -10,7 +10,8 @@ import { ObsidianApiServiceProvider } from '../../providers/obsidian-api-service
 })
 export class EquipmentsPage {
   equipments: Observable<any>;
-  constructor(public navCtrl: NavController, public navParams: NavParams,  private obsidianServiceAPI: ObsidianApiServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,  
+    private obsidianServiceAPI: ObsidianApiServiceProvider) {
     this.equipments =  this.obsidianServiceAPI.getEquipments();
   }
 

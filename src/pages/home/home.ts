@@ -7,7 +7,7 @@ import { ObsidianApiServiceProvider } from '../../providers/obsidian-api-service
 import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
 import { ProgramDetailPage } from '../program-detail/program-detail';
 import { Events } from 'ionic-angular';
-
+import { EquipmentRequestPage } from '../equipment-request/equipment-request';
 
 @Component({
 	selector: 'page-home',
@@ -23,16 +23,16 @@ export class HomePage {
 		private localNotifications: LocalNotifications,
 		public events: Events,
 		private web3Service: Web3ServiceProvider,
-		private obsidianApiProvider: ObsidianApiServiceProvider,
-		private storage: Storage
+		private obsidianApiProvider: ObsidianApiServiceProvider//,
+		//private storage: Storage
 	) {
 		obsidianApiProvider.getAccountInfo().then((accountInfo: any) => {
-			this.storage.clear().then(() => {			
-				this.storage.set('address', accountInfo.account);
-				this.storage.set('profileImageUrl', accountInfo.profileImageUrl);
-				this.storage.set('name', accountInfo.name);
-				this.name = accountInfo.name;
-				this.address = accountInfo.address;
+			// this.storage.clear().then(() => {			
+			// 	this.storage.set('address', accountInfo.account);
+			// 	this.storage.set('profileImageUrl', accountInfo.profileImageUrl);
+			// 	this.storage.set('name', accountInfo.name);
+				this.name = accountInfo.name;			
+				this.address = accountInfo.account;
 				this.imageUrl = accountInfo.profileImageUrl;
 				web3Service.setupSmartContractInfo(accountInfo.account)
 					.then((info: any) => {						
@@ -43,9 +43,11 @@ export class HomePage {
 					}).catch((error) => {
 						console.log(error);
 					});
+			}).catch((error) => {
+				debugger;
 			});
 
-		});		
+		//});		
 	}
 	setupListeners() {
 		this.listenForNewPrograms();
@@ -59,12 +61,13 @@ export class HomePage {
 
 	listenForPeerRequests() {
 		this.web3Service.listenForPeerRequests((peerRequestInfo) => {
-			debugger;
-			if(peerRequestInfo.account !== this.address){
+
+			this.navCtrl.push(EquipmentRequestPage, { peerRequestInfo: peerRequestInfo  });
+			if(peerRequestInfo.beneficiary !== this.address){
 				this.localNotifications.schedule({
 					title: "Obsidian",
 					text: 'A member of your group has requested a new equipment',
-					data: { transferInfo: peerRequestInfo, type: "newPeerRequest" },
+					data: { peerRequestInfo: peerRequestInfo, type: "newPeerRequest" },
 					at: null
 				});
 			}
@@ -102,6 +105,8 @@ export class HomePage {
 		this.localNotifications.on('click', (notification, state) => {
 			let json = JSON.parse(notification.data);
 			switch (json.type) {
+				case "newPeerRequest":					
+					this.navCtrl.push(EquipmentRequestPage, { peerRequestInfo: json.peerRequestInfo  });
 				case "newProgram":
 					this.navCtrl.push(ProgramDetailPage, { program: { ipfsHash: json.programInfo.ipfsHash, programId: json.programInfo.programId } });
 				case "newTransfer":

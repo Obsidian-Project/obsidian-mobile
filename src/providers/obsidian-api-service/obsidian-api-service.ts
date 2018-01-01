@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
-const BASE_URL = "https://obsidian-api.azurewebsites.net";
+const BASE_URL = "http://localhost:4000";//"https://obsidian-api.azurewebsites.net";
 const TRACTOR_URL = `${BASE_URL}/equipments/tractors`;
 const PROGRAMS_URL = `${BASE_URL}/programs`;
 const SMART_CONTRACT_URL = `${BASE_URL}/smartcontract`;
@@ -34,6 +34,10 @@ export class ObsidianApiServiceProvider {
     return this.http.get(MY_EQUIPMENTS_URL);    
   }
   
+  getEquipment(equipmentId){
+    return this.http.get(`${BASE_URL}/equipments/tractors/${equipmentId}`);    
+  }
+
   getProgram(ipfsHash){    
     let url = `${PROGRAMS_URL}/${ipfsHash}`;
     return this.http.get(url).toPromise();
