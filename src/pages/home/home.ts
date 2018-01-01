@@ -27,6 +27,7 @@ export class HomePage {
 	) {
 		obsidianApiProvider.getAccountInfo().then((accountInfo: any) => {
 			this.storage.clear().then(() => {			
+				debugger;
 				this.storage.set('address', accountInfo.account);
 				this.storage.set('profileImageUrl', accountInfo.profileImageUrl);
 				this.storage.set('name', accountInfo.name);

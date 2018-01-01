@@ -19,8 +19,8 @@ export class Web3ServiceProvider {
 	smartContractAddress: string;
 	address: any;
 	constructor(public http: HttpClient,
-		private obsidianApiProvider: ObsidianApiServiceProvider,
-		private storage: Storage) {
+		public obsidianApiProvider: ObsidianApiServiceProvider,
+		public storage: Storage) {
 		this.web3Instance = new Web3(new Web3.providers.HttpProvider(ETHEREUM_PROVIDER));
 	}
 
@@ -62,7 +62,7 @@ export class Web3ServiceProvider {
 	listenForEquipmentTransferred(callback) {
 		let contract = this.getSmartContractObject();
 		var myEvent = contract.newEquipmentTransferred({}, 'latest');
-		myEvent.watch(function (error, event) {
+		myEvent.watch((error, event) => {
 			console.log("A equipment has been transferred");
 			if (!error) {
 				this.storage.get('newEquipmentTransferred').then((val) => {
@@ -82,7 +82,7 @@ export class Web3ServiceProvider {
 	listenForNewPrograms(callback) {
 		let contract = this.getSmartContractObject();
 		var myEvent = contract.newProgramAdded({}, 'latest');
-		myEvent.watch(function (error, event) {
+		myEvent.watch((error, event) => {
 			console.log("New program was added");
 			if (!error) {
 				this.storage.get('newProgramAdded').then((val) => {
