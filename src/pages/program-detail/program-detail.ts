@@ -42,9 +42,6 @@ export class ProgramDetailPage {
       .then((result) => {
           loader.dismiss();       
       });
-    // setTimeout(() => {
-    //   loader.dismiss();
-    // }, 3000);
   }
   
   getLoaderInstance() {

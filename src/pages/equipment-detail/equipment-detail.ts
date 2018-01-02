@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
 
 @Component({
   selector: 'page-equipment-detail',
@@ -11,21 +12,40 @@ export class EquipmentDetailPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,   
+    private web3Service: Web3ServiceProvider,
     private alertCtrl: AlertController) {
     this.equipment = this.navParams.get('equipment');
-    // this.equipment.details = this.equipment.details.filter((item, index) => {
-    //     return index < 2;
-    // });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EquipmentDetailPage');
   }
 
-  requestEquipment() {
-    //TODO: still need to add logic and get the parameter of the program id
-    //out of scope for demo
-    this.loading();
+  requestPeerApproval() {
+    let loader = this.getLoaderInstance();
+    console.log(this.equipment.equipmentId);
+    loader.present();
+    this.web3Service.requestPeerApproval(this.equipment.equipmentId)
+      .then((result) => {
+          loader.dismiss();       
+      }).catch((error) => {
+        debugger;
+      });
+  }
+
+  getLoaderInstance() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent',
+      content: 'Requesting equipment',
+      duration: 3000,
+      showBackdrop: true,
+      cssClass: 'loader',
+    });
+    loading.onDidDismiss(() => {
+      console.log('Dismissed loading');
+      this.presentAlert();
+    });
+    return loading;
   }
 
   presentAlert() {//TODO: move to a service, duplication of code
