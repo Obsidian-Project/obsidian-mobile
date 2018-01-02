@@ -71,13 +71,32 @@ export class Web3ServiceProvider {
 
 	listenForEquipmentTransferred(callback) {
 		let contract = this.getSmartContractObject();
-		var myEvent = contract.newEquipmentTransferred({}, 'latest');
-		myEvent.watch((error, event) => {
+		var newEquipmentTransferredEvent = contract.newEquipmentTransferred({}, 'latest');
+		newEquipmentTransferredEvent.watch((error, event) => {
 			console.log("A equipment has been transferred");
 			if (!error) {
 				//this.storage.get('newEquipmentTransferred').then((val) => {
 				//	if (val) {
+				debugger;
 				let equipmentId = event.args.equipmentId.toNumber();
+				let recipient = event.args.recipient;
+				callback({
+					equipmentId, recipient
+				});
+				//	}
+					//this.storage.set('newEquipmentTransferred', 'on');
+				//});
+			}
+		});
+
+		var newSubsidyTransferredEvent = contract.newSubsidyTransferred({}, 'latest');
+		newSubsidyTransferredEvent.watch((error, event) => {
+			console.log("A subsidy has been transferred");
+			if (!error) {
+				//this.storage.get('newEquipmentTransferred').then((val) => {
+				//	if (val) {
+				debugger;
+				let equipmentId = event.args.programId.toNumber();
 				let recipient = event.args.recipient;
 				callback({
 					equipmentId, recipient

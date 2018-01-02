@@ -89,6 +89,7 @@ export class HomePage {
 			})
 		})
 	}
+
 	listenForNewPrograms() {
 		this.web3Service.listenForNewPrograms((programInfo) => {
 			this.events.publish('programCreated');
