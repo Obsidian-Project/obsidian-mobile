@@ -59,7 +59,7 @@ export class EquipmentDetailPage {
           handler: () => {
             let navTransition = alert.dismiss();
             navTransition.then(() => {              
-              this.navCtrl.setRoot(HomePage);
+              this.navCtrl.pop();
             });
             return false;
           }

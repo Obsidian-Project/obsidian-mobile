@@ -19,6 +19,7 @@ export class DetailsPage {
       this.balance = result;
       this.equipments = this.obsidianApiProvider.getMyEquipments().map((item) => {
         debugger;
+        return item;
       });
     });
   }

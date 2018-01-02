@@ -27,12 +27,12 @@ export class Web3ServiceProvider {
 	get() {
 		return this.web3Instance;
 	}
-	
+
 	requestPeerApproval(equipmentId) {
 		debugger;
 		return new Promise((resolve, reject) => {
 			let requester = this.address;
-			let contract = this.getSmartContractObject();			
+			let contract = this.getSmartContractObject();
 			contract.requestPeerApproval(equipmentId, requester, {
 				gas: 2000000,
 				from: requester
@@ -50,12 +50,12 @@ export class Web3ServiceProvider {
 					}
 				)
 			});
-		});				
+		});
 	}
 
 	getMyBalance() {
 		return new Promise((resolve, reject) => {
-			let contract = this.getSmartContractObject();			
+			let contract = this.getSmartContractObject();
 			contract.balances(this.address, (error, result) => {
 				resolve(result.toNumber());
 			})
@@ -63,17 +63,32 @@ export class Web3ServiceProvider {
 
 	}
 
-	requestOfEquipment(equipmentId){
+	requestOfEquipment(equipmentId) {
 		return new Promise((resolve, reject) => {
+			debugger;
 			let requester = this.address;
-			let contract = this.getSmartContractObject();			
-			contract.requestEquipment(equipmentId, requester, (error, result) => {
-				resolve(result.toNumber());
-			})
+			let contract = this.getSmartContractObject();
+			contract.requestEquipment(equipmentId, requester, {
+				gas: 2000000,
+				from: requester
+			}, (error, txHash) => {
+				if (error) {
+					throw error
+				}
+				this.waitForMined(txHash, { blockNumber: null },
+					function pendingCB() {
+						// Signal to the user you're still waiting
+						// for a block confirmation						
+					},
+					function successCB(data) {
+						resolve();//don't need to pass nothing
+					}
+				)
+			});
 		});
 	}
 
-	setupSmartContractInfo(address) {	
+	setupSmartContractInfo(address) {
 		return new Promise((resolve, reject) => {
 			this.address = address;
 			this.obsidianApiProvider.getSmartContractInfo()
@@ -110,7 +125,7 @@ export class Web3ServiceProvider {
 					equipmentId, recipient
 				});
 				//	}
-					//this.storage.set('newEquipmentTransferred', 'on');
+				//this.storage.set('newEquipmentTransferred', 'on');
 				//});
 			}
 		});
@@ -128,7 +143,7 @@ export class Web3ServiceProvider {
 					equipmentId, recipient
 				});
 				//	}
-					//this.storage.set('newEquipmentTransferred', 'on');
+				//this.storage.set('newEquipmentTransferred', 'on');
 				//});
 			}
 		});
@@ -167,7 +182,7 @@ export class Web3ServiceProvider {
 	}
 
 	requestEquipment = (equipmentId) => {
-		return new Promise((resolve, reject) => {			
+		return new Promise((resolve, reject) => {
 			let requester = this.address;
 			let obsidianContract = this.getSmartContractObject();
 			obsidianContract.requestEquipment(equipmentId, requester, {
@@ -191,7 +206,7 @@ export class Web3ServiceProvider {
 	}
 
 	applyForProgram = (programId) => {
-		return new Promise((resolve, reject) => {			
+		return new Promise((resolve, reject) => {
 			let requester = this.address;
 			let obsidianContract = this.getSmartContractObject();
 			obsidianContract.requestSubsidy(programId, requester, {

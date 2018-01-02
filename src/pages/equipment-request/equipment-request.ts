@@ -11,7 +11,7 @@ import { Web3ServiceProvider } from '../../providers/web3-service/web3-service';
   templateUrl: 'equipment-request.html',
 })
 export class EquipmentRequestPage {
-  peerRequestInfo: any;
+  equipmentId: any;
   equipment: Observable<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private obsidianServiceAPI: ObsidianApiServiceProvider, 
@@ -19,8 +19,9 @@ export class EquipmentRequestPage {
     public loadingCtrl: LoadingController,
     private alertCtrl: AlertController) {
     //peerRequestInfo
-    this.peerRequestInfo = this.navParams.get('peerRequestInfo');   
-    this.equipment = this.obsidianServiceAPI.getEquipment(this.peerRequestInfo.equipmentId.toNumber())
+    this.equipmentId = this.navParams.get('equipmentId');   
+    debugger;
+    this.equipment = this.obsidianServiceAPI.getEquipment(this.equipmentId)
       .map((item) => {
         return item[0];
       })
@@ -30,10 +31,10 @@ export class EquipmentRequestPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EquipmentRequestPage');
   }
-  approveRequestOfEquipment(equipmentId){
+  approveRequestOfEquipment(){
     let loader = this.getLoaderInstance();
     loader.present();
-    this.web3ServiceProvider.requestOfEquipment(equipmentId)
+    this.web3ServiceProvider.requestOfEquipment(this.equipmentId)
       .then((result) => {
         loader.dismiss();       
       })

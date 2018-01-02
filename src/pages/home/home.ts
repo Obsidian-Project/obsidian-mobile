@@ -23,31 +23,38 @@ export class HomePage {
 		private localNotifications: LocalNotifications,
 		public events: Events,
 		private web3Service: Web3ServiceProvider,
-		private obsidianApiProvider: ObsidianApiServiceProvider//,
-		//private storage: Storage
+		private obsidianApiProvider: ObsidianApiServiceProvider,
+		private storage: Storage
 	) {
-		obsidianApiProvider.getAccountInfo().then((accountInfo: any) => {
-			// this.storage.clear().then(() => {			
-			// 	this.storage.set('address', accountInfo.account);
-			// 	this.storage.set('profileImageUrl', accountInfo.profileImageUrl);
-			// 	this.storage.set('name', accountInfo.name);
-				this.name = accountInfo.name;			
-				this.address = accountInfo.account;
-				this.imageUrl = accountInfo.profileImageUrl;
-				web3Service.setupSmartContractInfo(accountInfo.account)
-					.then((info: any) => {						
-						this.web3Service.getMyBalance().then((result) => {
-							this.balance = result;
-						})
-						this.setupListeners();
-					}).catch((error) => {
-						console.log(error);
-					});
-			}).catch((error) => {
-				debugger;
-			});
+		// this.storage.get("allSet")
+		// 	.then((value) => {
+		// 		if (value)
+		// 			return;
 
-		//});		
+				obsidianApiProvider.getAccountInfo().then((accountInfo: any) => {
+					// this.storage.clear().then(() => {			
+					// 	this.storage.set('address', accountInfo.account);
+					// 	this.storage.set('profileImageUrl', accountInfo.profileImageUrl);
+					// 	this.storage.set('name', accountInfo.name);
+					this.storage.set("allSet", true);
+					this.name = accountInfo.name;
+					this.address = accountInfo.account;
+					this.imageUrl = accountInfo.profileImageUrl;
+					web3Service.setupSmartContractInfo(accountInfo.account)
+						.then((info: any) => {
+							this.web3Service.getMyBalance().then((result) => {
+								this.balance = result;
+							})
+							this.setupListeners();
+						}).catch((error) => {
+							console.log(error);
+						});
+				}).catch((error) => {
+					debugger;
+				});
+
+				//});	
+			//})
 	}
 	setupListeners() {
 		this.listenForNewPrograms();
@@ -61,12 +68,11 @@ export class HomePage {
 
 	listenForPeerRequests() {
 		this.web3Service.listenForPeerRequests((peerRequestInfo) => {
-			//this.navCtrl.push(EquipmentRequestPage, { peerRequestInfo: peerRequestInfo  });
-			if(peerRequestInfo.beneficiary !== this.address){
+			if (peerRequestInfo.recipient !== this.address) {
 				this.localNotifications.schedule({
 					title: "Obsidian",
 					text: 'A member of your group has requested a new equipment',
-					data: { peerRequestInfo: peerRequestInfo, type: "newPeerRequest" },
+					data: { equipmentId: peerRequestInfo.equipmentId.toNumber(), type: "newPeerRequest" },
 					at: null
 				});
 			}
@@ -105,8 +111,8 @@ export class HomePage {
 		this.localNotifications.on('click', (notification, state) => {
 			let json = JSON.parse(notification.data);
 			switch (json.type) {
-				case "newPeerRequest":					
-					this.navCtrl.push(EquipmentRequestPage, { peerRequestInfo: json.peerRequestInfo  });
+				case "newPeerRequest":
+					this.navCtrl.push(EquipmentRequestPage, { equipmentId: json.equipmentId });
 				case "newProgram":
 					this.navCtrl.push(ProgramDetailPage, { program: { ipfsHash: json.programInfo.ipfsHash, programId: json.programInfo.programId } });
 				case "newTransfer":
