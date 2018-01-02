@@ -61,8 +61,7 @@ export class HomePage {
 
 	listenForPeerRequests() {
 		this.web3Service.listenForPeerRequests((peerRequestInfo) => {
-
-			this.navCtrl.push(EquipmentRequestPage, { peerRequestInfo: peerRequestInfo  });
+			//this.navCtrl.push(EquipmentRequestPage, { peerRequestInfo: peerRequestInfo  });
 			if(peerRequestInfo.beneficiary !== this.address){
 				this.localNotifications.schedule({
 					title: "Obsidian",

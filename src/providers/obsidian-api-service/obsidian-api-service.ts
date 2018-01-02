@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
-const BASE_URL = "http://localhost:4000";//"https://obsidian-api.azurewebsites.net";
+const BASE_URL = "https://obsidian-api.azurewebsites.net";
 const TRACTOR_URL = `${BASE_URL}/equipments/tractors`;
 const PROGRAMS_URL = `${BASE_URL}/programs`;
 const SMART_CONTRACT_URL = `${BASE_URL}/smartcontract`;
