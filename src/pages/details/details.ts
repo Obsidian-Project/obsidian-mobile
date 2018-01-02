@@ -17,7 +17,9 @@ export class DetailsPage {
     private web3Service: Web3ServiceProvider) {
     this.web3Service.getMyBalance().then((result) => {
       this.balance = result;
-      this.equipments = this.obsidianApiProvider.getMyEquipments();
+      this.equipments = this.obsidianApiProvider.getMyEquipments().map((item) => {
+        debugger;
+      });
     });
   }
 

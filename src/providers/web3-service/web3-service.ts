@@ -27,6 +27,31 @@ export class Web3ServiceProvider {
 	get() {
 		return this.web3Instance;
 	}
+	
+	requestPeerApproval(equipmentId) {
+		debugger;
+		return new Promise((resolve, reject) => {
+			let requester = this.address;
+			let contract = this.getSmartContractObject();			
+			contract.requestPeerApproval(equipmentId, requester, {
+				gas: 2000000,
+				from: requester
+			}, (error, txHash) => {
+				if (error) {
+					throw error
+				}
+				this.waitForMined(txHash, { blockNumber: null },
+					function pendingCB() {
+						// Signal to the user you're still waiting
+						// for a block confirmation						
+					},
+					function successCB(data) {
+						resolve();//don't need to pass nothing
+					}
+				)
+			});
+		});				
+	}
 
 	getMyBalance() {
 		return new Promise((resolve, reject) => {
@@ -40,8 +65,9 @@ export class Web3ServiceProvider {
 
 	requestOfEquipment(equipmentId){
 		return new Promise((resolve, reject) => {
+			let requester = this.address;
 			let contract = this.getSmartContractObject();			
-			contract.requestEquipment(equipmentId, (error, result) => {
+			contract.requestEquipment(equipmentId, requester, (error, result) => {
 				resolve(result.toNumber());
 			})
 		});
@@ -109,9 +135,9 @@ export class Web3ServiceProvider {
 	}
 	listenForPeerRequests(callback) {
 		let contract = this.getSmartContractObject();
-		var myEvent = contract.newEquipmentRequested({}, 'latest');
+		var myEvent = contract.newPeerApprovalRequested({}, 'latest');
 		myEvent.watch((error, event) => {
-			console.log("New peer request was added");
+			console.log("New peer approval requested");
 			if (!error) {
 				//this.storage.get('newProgramAdded').then((val) => {
 				//	if (val) {
@@ -140,11 +166,35 @@ export class Web3ServiceProvider {
 		});
 	}
 
+	requestEquipment = (equipmentId) => {
+		return new Promise((resolve, reject) => {			
+			let requester = this.address;
+			let obsidianContract = this.getSmartContractObject();
+			obsidianContract.requestEquipment(equipmentId, requester, {
+				gas: 2000000,
+				from: this.address
+			}, (error, txHash) => {
+				if (error) {
+					throw error
+				}
+				this.waitForMined(txHash, { blockNumber: null },
+					function pendingCB() {
+						// Signal to the user you're still waiting
+						// for a block confirmation						
+					},
+					function successCB(data) {
+						resolve();//don't need to pass nothing
+					}
+				)
+			})
+		})
+	}
+
 	applyForProgram = (programId) => {
 		return new Promise((resolve, reject) => {			
 			let requester = this.address;
 			let obsidianContract = this.getSmartContractObject();
-			obsidianContract.requestEquipment(programId, requester, {
+			obsidianContract.requestSubsidy(programId, requester, {
 				gas: 2000000,
 				from: this.address
 			}, (error, txHash) => {
