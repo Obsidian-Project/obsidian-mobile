@@ -45,12 +45,10 @@
   <div class="detail-items">
       <ion-list>
           <ion-item *ngFor="let equipment of (equipments | async)">
-            <h6>{{ equipment.selectedEquipment.title }}</h6>
+            <h6>{{ equipment.title }}</h6>
             <p>December 30</p>           
-            <p item-end class="included">$ {{ balance ? (equipment.costPerUnit - equipment.subsidyAmount) / 2 : 0 }}</p>
+            <p item-end class="included">$ {{ balance ? (equipment.price - equipment.subsidyAmount) / 2 : 0 }}</p>
           </ion-item>           
         </ion-list>
   </div>
 </ion-content>
-
-(costPerUnit - subsidyAmount)

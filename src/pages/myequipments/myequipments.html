@@ -21,13 +21,13 @@
         <button detail-none ion-item *ngFor="let equipment of (equipments | async)">
           <ion-card>
             <ion-item>
-              <h2 text-wrap>{{ equipment.selectedEquipment.title }}</h2>
-              <p text-wrap>{{ equipment.selectedEquipment.mainFeature }}</p>
+              <h2 text-wrap>{{ equipment.title }}</h2>
+              <p text-wrap>{{ equipment.mainFeature }}</p>
             </ion-item>
-            <img src="{{ equipment.selectedEquipment.imageUrl }}">
+            <img src="{{ equipment.imageUrl }}">
     
             <ion-card-content>
-              <p text-wrap>{{ equipment.selectedEquipment.description }}</p>
+              <p text-wrap>{{ equipment.description }}</p>
             </ion-card-content>
     
           </ion-card>
