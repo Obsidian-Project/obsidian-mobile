@@ -23,7 +23,7 @@
 
         <ion-card-content>
           <ul>
-            <li *ngFor="let detail of equipment.details">
+            <li *ngFor="let detail of filterItems(equipment.details)">
                 {{ detail }}
               </li>
           </ul>

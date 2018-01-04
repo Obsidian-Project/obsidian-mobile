@@ -32,7 +32,11 @@ export class EquipmentDetailPage {
         debugger;
       });
   }
-
+  filterItems(items) {
+    return items.filter((x, index) => {
+      return index < 2;
+    });
+  } 
   getLoaderInstance() {
     let loading = this.loadingCtrl.create({
       spinner: 'crescent',
