@@ -5,7 +5,7 @@ import Web3 from 'web3';
 import { ObsidianApiServiceProvider } from '../obsidian-api-service/obsidian-api-service';
 import { Storage } from '@ionic/storage';
 
-const ETHEREUM_PROVIDER = "http://52.178.92.72:8545";
+const ETHEREUM_PROVIDER = "http://obsidian-node.westeurope.cloudapp.azure.com:8545";
 
 interface SmartContractInfo {
 	abi: string;
